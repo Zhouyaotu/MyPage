@@ -4,7 +4,7 @@
       class="list"
       v-infinite-scroll="load"
       infinite-scroll-disabled="disabled">
-      <li v-for="i in count" class="list-item">{{ i }}</li>
+      <li v-for="i in count" class="list-item">{{ 'user:'+i+' '+'label' }}</li>
     </ul>
     <p v-if="loading">加载中...</p>
     <p v-if="noMore">没有更多了</p>
