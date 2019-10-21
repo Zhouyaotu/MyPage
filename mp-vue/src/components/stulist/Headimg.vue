@@ -1,9 +1,7 @@
 <template>
-  <el-col>
-    <div class="demo-basic--circle">
-      <div class="block"><el-avatar :size="70" :src="circleUrl"></el-avatar></div>
-    </div>
-  </el-col>  
+  <div>
+    <div class="block"><el-avatar :size="80" :src="circleUrl"></el-avatar></div>
+  </div>  
 </template>
 <script>
   export default {

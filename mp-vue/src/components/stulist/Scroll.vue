@@ -5,10 +5,16 @@
       v-infinite-scroll="load"
       infinite-scroll-disabled="disabled">
       <div v-for="i in count" class="list-item">
-        <el-row>
-          <el-col :span="4"><Headimg/></el-col>
-          <el-col :span="10"><Stutags/></el-col>
-        </el-row>
+        <el-container type="flex">
+          <el-aside width="200px"><Headimg/></el-aside>
+          <el-main>
+            <el-row type="flex" justify="start">username:{{i}}</el-row>
+            <el-row type="flex" justify="start">
+              <Stutags/>
+            </el-row>
+          </el-main>
+          
+        </el-container>
       </div>
     </ul>
     <p v-if="loading">加载中...</p>
