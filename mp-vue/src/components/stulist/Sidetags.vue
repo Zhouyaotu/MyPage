@@ -1,55 +1,62 @@
 <template>
-    <div>
-        <el-row class="tac">
-            <el-col>
-                <h5>兴趣标签</h5>
-                <el-menu
-                default-active="2"
-                class="el-menu-vertical-demo"
-                @open="handleOpen"
-                @close="handleClose">
-                    <el-submenu index="1">
-                        <template slot="title">
-                        <i class="el-icon-location"></i>
-                        <span>学校组织</span>
-                        </template>
-                        <el-menu-item index="1-1">学生会</el-menu-item>
-                        <el-menu-item index="1-2">艺术团</el-menu-item>
-                        <el-menu-item index="1-3">校团委</el-menu-item>
-                        <el-submenu index="1-4">
-                            <template slot="title">社团</template>
-                            <el-menu-item index="1-4-1">话剧社</el-menu-item>
-                        </el-submenu>
-                    </el-submenu>
-                    <el-menu-item index="2">
-                        <i class="el-icon-menu"></i>
-                        <span slot="title">科研项目</span>
-                    </el-menu-item>
-                    <el-menu-item index="3" disabled>
-                        <i class="el-icon-document"></i>
-                        <span slot="title">休闲娱乐</span>
-                    </el-menu-item>
-                    <el-menu-item index="4">
-                        <i class="el-icon-setting"></i>
-                        <span slot="title">就业工作</span>
-                    </el-menu-item>
-                </el-menu>
-            </el-col>
-        </el-row>
-    </div>
+  <div>
+    <span class="demonstration">兴趣标签</span>
+    <el-select v-model="value" multiple filterable class="spsize" placeholder="请选择">
+      <el-option
+        v-for="item in options"
+        :key="item.value"
+        :label="item.label"
+        :value="item.value"
+        style="height:100%"
+        >
+      </el-option>
+    </el-select>
+  </div>
 </template>
-
 
 <script>
   export default {
-    name:'Sidetags',
-    methods: {
-      handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-      },
-      handleClose(key, keyPath) {
-        console.log(key, keyPath);
+    data() {
+      return {
+        options: [{
+          value: '选项1',
+          label: '黄金糕'
+        }, {
+          value: '选项2',
+          label: '双皮奶'
+        }, {
+          value: '选项3',
+          label: '蚵仔煎'
+        }, {
+          value: '选项4',
+          label: '龙须面'
+        }, {
+          value: '选项5',
+          label: '北京烤鸭'
+        }, {
+          value: '选项6',
+          label: '黄金糕'
+        }, {
+          value: '选项7',
+          label: '双皮奶'
+        }, {
+          value: '选项8',
+          label: '蚵仔煎'
+        }, {
+          value: '选项9',
+          label: '龙须面'
+        }, {
+          value: '选项10',
+          label: '北京烤鸭'
+        }],
+        value: ''
       }
     }
   }
 </script>
+
+<style>
+  .spsize{
+    width: 100%;
+  }
+</style>
