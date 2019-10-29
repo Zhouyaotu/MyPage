@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mp.mypage.user.dao.UserInfoMapper">
+    <resultMap id="BaseResultMap" type="com.mp.mypage.user.entity.UserInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="sex" jdbcType="BIT" property="sex"/>
+        <result column="birth_year" jdbcType="DATE" property="birthYear"/>
+        <result column="home_province" jdbcType="VARCHAR" property="homeProvince"/>
+        <result column="home_city" jdbcType="VARCHAR" property="homeCity"/>
+        <result column="live_province" jdbcType="VARCHAR" property="liveProvince"/>
+        <result column="live_city" jdbcType="VARCHAR" property="liveCity"/>
+        <result column="major" jdbcType="VARCHAR" property="major"/>
+        <result column="enrollment_year" jdbcType="DATE" property="enrollmentYear"/>
+        <result column="work_status" jdbcType="BIT" property="workStatus"/>
+        <result column="emotion_status" jdbcType="BIT" property="emotionStatus"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, user_id, sex, birth_year, home_province, home_city, live_province, live_city,
+    major, enrollment_year, work_status, emotion_status
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_info
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete
+        from user_info
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.mp.mypage.user.entity.UserInfo">
+        insert into user_info (id, user_id, sex, birth_year,
+                               home_province, home_city, live_province,
+                               live_city, major, enrollment_year,
+                               work_status, emotion_status)
+        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{sex,jdbcType=BIT}, #{birthYear,jdbcType=DATE},
+                #{homeProvince,jdbcType=VARCHAR}, #{homeCity,jdbcType=VARCHAR}, #{liveProvince,jdbcType=VARCHAR},
+                #{liveCity,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{enrollmentYear,jdbcType=DATE},
+                #{workStatus,jdbcType=BIT}, #{emotionStatus,jdbcType=BIT})
+    </insert>
+    <insert id="insertSelective" parameterType="com.mp.mypage.user.entity.UserInfo">
+        insert into user_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="sex != null">
+                sex,
+            </if>
+            <if test="birthYear != null">
+                birth_year,
+            </if>
+            <if test="homeProvince != null">
+                home_province,
+            </if>
+            <if test="homeCity != null">
+                home_city,
+            </if>
+            <if test="liveProvince != null">
+                live_province,
+            </if>
+            <if test="liveCity != null">
+                live_city,
+            </if>
+            <if test="major != null">
+                major,
+            </if>
+            <if test="enrollmentYear != null">
+                enrollment_year,
+            </if>
+            <if test="workStatus != null">
+                work_status,
+            </if>
+            <if test="emotionStatus != null">
+                emotion_status,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="sex != null">
+                #{sex,jdbcType=BIT},
+            </if>
+            <if test="birthYear != null">
+                #{birthYear,jdbcType=DATE},
+            </if>
+            <if test="homeProvince != null">
+                #{homeProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="homeCity != null">
+                #{homeCity,jdbcType=VARCHAR},
+            </if>
+            <if test="liveProvince != null">
+                #{liveProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="liveCity != null">
+                #{liveCity,jdbcType=VARCHAR},
+            </if>
+            <if test="major != null">
+                #{major,jdbcType=VARCHAR},
+            </if>
+            <if test="enrollmentYear != null">
+                #{enrollmentYear,jdbcType=DATE},
+            </if>
+            <if test="workStatus != null">
+                #{workStatus,jdbcType=BIT},
+            </if>
+            <if test="emotionStatus != null">
+                #{emotionStatus,jdbcType=BIT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mp.mypage.user.entity.UserInfo">
+        update user_info
+        <set>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=BIGINT},
+            </if>
+            <if test="sex != null">
+                sex = #{sex,jdbcType=BIT},
+            </if>
+            <if test="birthYear != null">
+                birth_year = #{birthYear,jdbcType=DATE},
+            </if>
+            <if test="homeProvince != null">
+                home_province = #{homeProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="homeCity != null">
+                home_city = #{homeCity,jdbcType=VARCHAR},
+            </if>
+            <if test="liveProvince != null">
+                live_province = #{liveProvince,jdbcType=VARCHAR},
+            </if>
+            <if test="liveCity != null">
+                live_city = #{liveCity,jdbcType=VARCHAR},
+            </if>
+            <if test="major != null">
+                major = #{major,jdbcType=VARCHAR},
+            </if>
+            <if test="enrollmentYear != null">
+                enrollment_year = #{enrollmentYear,jdbcType=DATE},
+            </if>
+            <if test="workStatus != null">
+                work_status = #{workStatus,jdbcType=BIT},
+            </if>
+            <if test="emotionStatus != null">
+                emotion_status = #{emotionStatus,jdbcType=BIT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mp.mypage.user.entity.UserInfo">
+        update user_info
+        set user_id         = #{userId,jdbcType=BIGINT},
+            sex             = #{sex,jdbcType=BIT},
+            birth_year      = #{birthYear,jdbcType=DATE},
+            home_province   = #{homeProvince,jdbcType=VARCHAR},
+            home_city       = #{homeCity,jdbcType=VARCHAR},
+            live_province   = #{liveProvince,jdbcType=VARCHAR},
+            live_city       = #{liveCity,jdbcType=VARCHAR},
+            major           = #{major,jdbcType=VARCHAR},
+            enrollment_year = #{enrollmentYear,jdbcType=DATE},
+            work_status     = #{workStatus,jdbcType=BIT},
+            emotion_status  = #{emotionStatus,jdbcType=BIT}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+</mapper>
