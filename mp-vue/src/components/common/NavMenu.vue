@@ -32,8 +32,8 @@
     data () {
       return {
         navList: [
-          {name: '/index', navItem: '个人'},
-          {name: '/recommend', navItem: '推荐'},
+          {name: '/index1', navItem: '个人'},
+          {name: '/index', navItem: '推荐'},
           {name: '/talk', navItem: '讨论'},
           {name: '/msg', navItem: '私信'}
         ],
