@@ -6,8 +6,6 @@ import java.util.Objects;
 public class UserInfo {
     private Long id;
 
-    private Long userId;
-
     private Boolean sex;
 
     private Date birthYear;
@@ -32,7 +30,6 @@ public class UserInfo {
     public String toString() {
         return "UserInfo{" +
                 "id=" + id +
-                ", userId=" + userId +
                 ", sex=" + sex +
                 ", birthYear=" + birthYear +
                 ", homeProvince='" + homeProvince + '\'' +
@@ -52,15 +49,6 @@ public class UserInfo {
 
     public UserInfo setId(Long id) {
         this.id = id;
-        return this;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public UserInfo setUserId(Long userId) {
-        this.userId = userId;
         return this;
     }
 

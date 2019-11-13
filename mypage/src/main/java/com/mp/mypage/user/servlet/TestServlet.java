@@ -2,6 +2,7 @@ package com.mp.mypage.user.servlet;
 
 import com.mp.mypage.user.dao.UserBaseMapper;
 import com.mp.mypage.user.entity.UserBase;
+import com.mp.mypage.user.service.AccountService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,6 +17,9 @@ import java.util.List;
 public class TestServlet {
     @Resource
     UserBaseMapper userBaseMapper;
+
+    @Resource
+    AccountService accountService;
 
     @RequestMapping(value = "/insert-user")
     public void insertUserBase(HttpServletResponse response, String username, String email) throws IOException {
@@ -39,4 +43,5 @@ public class TestServlet {
             writer.println(userBase);
         }
     }
+
 }

@@ -3,7 +3,6 @@
 <mapper namespace="com.mp.mypage.user.dao.UserInfoMapper">
     <resultMap id="BaseResultMap" type="com.mp.mypage.user.entity.UserInfo">
         <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="sex" jdbcType="BIT" property="sex"/>
         <result column="birth_year" jdbcType="DATE" property="birthYear"/>
         <result column="home_province" jdbcType="VARCHAR" property="homeProvince"/>
@@ -16,7 +15,7 @@
         <result column="emotion_status" jdbcType="BIT" property="emotionStatus"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, user_id, sex, birth_year, home_province, home_city, live_province, live_city,
+        id, sex, birth_year, home_province, home_city, live_province, live_city,
     major, enrollment_year, work_status, emotion_status
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -31,11 +30,11 @@
         where id = #{id,jdbcType=BIGINT}
     </delete>
     <insert id="insert" parameterType="com.mp.mypage.user.entity.UserInfo">
-        insert into user_info (id, user_id, sex, birth_year,
+        insert into user_info (id, sex, birth_year,
                                home_province, home_city, live_province,
                                live_city, major, enrollment_year,
                                work_status, emotion_status)
-        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{sex,jdbcType=BIT}, #{birthYear,jdbcType=DATE},
+        values (#{id,jdbcType=BIGINT}, #{sex,jdbcType=BIT}, #{birthYear,jdbcType=DATE},
                 #{homeProvince,jdbcType=VARCHAR}, #{homeCity,jdbcType=VARCHAR}, #{liveProvince,jdbcType=VARCHAR},
                 #{liveCity,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{enrollmentYear,jdbcType=DATE},
                 #{workStatus,jdbcType=BIT}, #{emotionStatus,jdbcType=BIT})
@@ -45,9 +44,6 @@
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 id,
-            </if>
-            <if test="userId != null">
-                user_id,
             </if>
             <if test="sex != null">
                 sex,
@@ -84,9 +80,6 @@
             <if test="id != null">
                 #{id,jdbcType=BIGINT},
             </if>
-            <if test="userId != null">
-                #{userId,jdbcType=BIGINT},
-            </if>
             <if test="sex != null">
                 #{sex,jdbcType=BIT},
             </if>
@@ -122,9 +115,6 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.mp.mypage.user.entity.UserInfo">
         update user_info
         <set>
-            <if test="userId != null">
-                user_id = #{userId,jdbcType=BIGINT},
-            </if>
             <if test="sex != null">
                 sex = #{sex,jdbcType=BIT},
             </if>
@@ -160,8 +150,7 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.mp.mypage.user.entity.UserInfo">
         update user_info
-        set user_id         = #{userId,jdbcType=BIGINT},
-            sex             = #{sex,jdbcType=BIT},
+        set sex             = #{sex,jdbcType=BIT},
             birth_year      = #{birthYear,jdbcType=DATE},
             home_province   = #{homeProvince,jdbcType=VARCHAR},
             home_city       = #{homeCity,jdbcType=VARCHAR},
