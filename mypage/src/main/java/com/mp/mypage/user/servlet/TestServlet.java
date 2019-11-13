@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.util.List;
 
 @Controller
 public class TestServlet {
@@ -29,5 +30,13 @@ public class TestServlet {
         userBaseMapper.insertSelective(userBase);
         response.getWriter().println("Operate Successfully!");
         response.getWriter().println(userBase);
+    }
+
+    @RequestMapping(value = "/find-all-user")
+    public void findAllUser(PrintWriter writer){
+        List<UserBase> list = userBaseMapper.selectAll();
+        for(UserBase userBase : list){
+            writer.println(userBase);
+        }
     }
 }

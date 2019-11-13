@@ -173,4 +173,9 @@
             emotion_status  = #{emotionStatus,jdbcType=BIT}
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select *
+        from user_info;
+    </select>
 </mapper>

@@ -1,7 +1,11 @@
 package com.mp.mypage.user.dao;
 
 import com.mp.mypage.user.entity.UserLabel;
+import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
+@Mapper
 public interface UserLabelMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -10,6 +14,8 @@ public interface UserLabelMapper {
     int insertSelective(UserLabel record);
 
     UserLabel selectByPrimaryKey(Long id);
+
+    List<UserLabel> selectAll();
 
     int updateByPrimaryKeySelective(UserLabel record);
 

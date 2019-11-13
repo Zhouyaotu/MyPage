@@ -91,4 +91,9 @@
             follow_status   = #{followStatus,jdbcType=BIT}
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select *
+        from user_follower;
+    </select>
 </mapper>

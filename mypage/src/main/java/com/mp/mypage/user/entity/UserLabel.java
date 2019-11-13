@@ -23,31 +23,35 @@ public class UserLabel {
         return id;
     }
 
-    public void setId(Long id) {
+    public UserLabel setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public UserLabel setUserId(Long userId) {
         this.userId = userId;
+        return this;
     }
 
     public String getLabelContent() {
         return labelContent;
     }
 
-    public void setLabelContent(String labelContent) {
-        this.labelContent = labelContent == null ? null : labelContent.trim();
+    public UserLabel setLabelContent(String labelContent) {
+        this.labelContent = labelContent;
+        return this;
     }
 
     public Byte getLabelType() {
         return labelType;
     }
 
-    public void setLabelType(Byte labelType) {
+    public UserLabel setLabelType(Byte labelType) {
         this.labelType = labelType;
+        return this;
     }
 }

@@ -115,4 +115,9 @@
             account_status = #{accountStatus,jdbcType=TINYINT}
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select *
+        from user_base;
+    </select>
 </mapper>
