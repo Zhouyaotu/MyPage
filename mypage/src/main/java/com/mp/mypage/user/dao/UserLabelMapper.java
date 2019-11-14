@@ -15,7 +15,7 @@ public interface UserLabelMapper {
 
     UserLabel selectByPrimaryKey(Long id);
 
-    List<UserLabel> selectAll();
+    List<UserLabel> selectAllLabelsByUserId(long userId);
 
     int updateByPrimaryKeySelective(UserLabel record);
 

@@ -81,8 +81,9 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="selectAll" resultMap="BaseResultMap">
+    <select id="selectAllLabelsByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select *
-        from user_label;
+        from user_label
+        where user_id = #{userId, jdbcType=BIGINT}
     </select>
 </mapper>

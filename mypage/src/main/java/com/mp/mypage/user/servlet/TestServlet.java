@@ -1,10 +1,13 @@
 package com.mp.mypage.user.servlet;
 
 import com.mp.mypage.user.dao.UserBaseMapper;
+import com.mp.mypage.user.dao.UserInfoMapper;
 import com.mp.mypage.user.entity.UserBase;
+import com.mp.mypage.user.entity.UserInfo;
 import com.mp.mypage.user.service.AccountService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +20,9 @@ import java.util.List;
 public class TestServlet {
     @Resource
     UserBaseMapper userBaseMapper;
+
+    @Resource
+    UserInfoMapper userInfoMapper;
 
     @Resource
     AccountService accountService;
@@ -32,6 +38,8 @@ public class TestServlet {
         userBase.setSafeEmail(email);
 
         userBaseMapper.insertSelective(userBase);
+        userInfoMapper.insertSelective(new UserInfo().setId(userBase.getId()));
+
         response.getWriter().println("Operate Successfully!");
         response.getWriter().println(userBase);
     }

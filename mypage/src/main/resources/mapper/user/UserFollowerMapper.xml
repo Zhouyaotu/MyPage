@@ -22,6 +22,12 @@
         from user_follower
         where id = #{id,jdbcType=BIGINT}
     </delete>
+    <delete id="deleteByUserIdPair">
+        delete
+        from user_follower
+        where subject_user_id = #{srcId,jdbcType=BIGINT} AND
+              object_user_id = #{destId, jdbcType=BIGINT}
+    </delete>
     <insert id="insert" parameterType="com.mp.mypage.user.entity.UserFollower">
         insert into user_follower (id, subject_user_id, object_user_id,
                                    user_group_id, follow_status)
@@ -92,8 +98,16 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="selectAll" resultMap="BaseResultMap">
+    <update id="updateByUserIdPair" parameterType="com.mp.mypage.user.entity.UserFollower">
+        update user_follower
+        set user_group_id  = #{userGroupId,jdbcType=BIGINT}
+        where subject_user_id = #{subjectUserId, jdbcType=BIGINT} AND
+              object_user_id = #{objectUserId, jdbcType=BIGINT}
+    </update>
+
+    <select id="selectAllFollowerByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select *
-        from user_follower;
+        from user_follower
+        where subject_user_id = #{srcId, jdbcType=BIGINT}
     </select>
 </mapper>
