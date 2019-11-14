@@ -6,8 +6,6 @@ import java.util.Objects;
 public class UserInfo {
     private Long id;
 
-    private Long userId;
-
     private Boolean sex;
 
     private Date birthYear;
@@ -32,7 +30,6 @@ public class UserInfo {
     public String toString() {
         return "UserInfo{" +
                 "id=" + id +
-                ", userId=" + userId +
                 ", sex=" + sex +
                 ", birthYear=" + birthYear +
                 ", homeProvince='" + homeProvince + '\'' +
@@ -50,95 +47,98 @@ public class UserInfo {
         return id;
     }
 
-    public void setId(Long id) {
+    public UserInfo setId(Long id) {
         this.id = id;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
+        return this;
     }
 
     public Boolean getSex() {
         return sex;
     }
 
-    public void setSex(Boolean sex) {
+    public UserInfo setSex(Boolean sex) {
         this.sex = sex;
+        return this;
     }
 
     public Date getBirthYear() {
         return birthYear;
     }
 
-    public void setBirthYear(Date birthYear) {
+    public UserInfo setBirthYear(Date birthYear) {
         this.birthYear = birthYear;
+        return this;
     }
 
     public String getHomeProvince() {
         return homeProvince;
     }
 
-    public void setHomeProvince(String homeProvince) {
-        this.homeProvince = homeProvince == null ? null : homeProvince.trim();
+    public UserInfo setHomeProvince(String homeProvince) {
+        this.homeProvince = homeProvince;
+        return this;
     }
 
     public String getHomeCity() {
         return homeCity;
     }
 
-    public void setHomeCity(String homeCity) {
-        this.homeCity = homeCity == null ? null : homeCity.trim();
+    public UserInfo setHomeCity(String homeCity) {
+        this.homeCity = homeCity;
+        return this;
     }
 
     public String getLiveProvince() {
         return liveProvince;
     }
 
-    public void setLiveProvince(String liveProvince) {
-        this.liveProvince = liveProvince == null ? null : liveProvince.trim();
+    public UserInfo setLiveProvince(String liveProvince) {
+        this.liveProvince = liveProvince;
+        return this;
     }
 
     public String getLiveCity() {
         return liveCity;
     }
 
-    public void setLiveCity(String liveCity) {
-        this.liveCity = liveCity == null ? null : liveCity.trim();
+    public UserInfo setLiveCity(String liveCity) {
+        this.liveCity = liveCity;
+        return this;
     }
 
     public String getMajor() {
         return major;
     }
 
-    public void setMajor(String major) {
-        this.major = major == null ? null : major.trim();
+    public UserInfo setMajor(String major) {
+        this.major = major;
+        return this;
     }
 
     public Date getEnrollmentYear() {
         return enrollmentYear;
     }
 
-    public void setEnrollmentYear(Date enrollmentYear) {
+    public UserInfo setEnrollmentYear(Date enrollmentYear) {
         this.enrollmentYear = enrollmentYear;
+        return this;
     }
 
     public Boolean getWorkStatus() {
         return workStatus;
     }
 
-    public void setWorkStatus(Boolean workStatus) {
+    public UserInfo setWorkStatus(Boolean workStatus) {
         this.workStatus = workStatus;
+        return this;
     }
 
     public Boolean getEmotionStatus() {
         return emotionStatus;
     }
 
-    public void setEmotionStatus(Boolean emotionStatus) {
+    public UserInfo setEmotionStatus(Boolean emotionStatus) {
         this.emotionStatus = emotionStatus;
+        return this;
     }
 }
