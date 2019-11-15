@@ -67,4 +67,9 @@
             group_name = #{groupName,jdbcType=VARCHAR}
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select *
+        from user_group;
+    </select>
 </mapper>
