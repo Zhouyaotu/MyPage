@@ -1,6 +1,5 @@
 package com.mp.mypage.user.entity;
 
-import java.util.Date;
 import java.util.Objects;
 
 public class UserInfo {
@@ -8,7 +7,7 @@ public class UserInfo {
 
     private Boolean sex;
 
-    private Date birthYear;
+    private int birthYear;
 
     private String homeProvince;
 
@@ -20,7 +19,7 @@ public class UserInfo {
 
     private String major;
 
-    private Date enrollmentYear;
+    private int enrollmentYear;
 
     private Boolean workStatus;
 
@@ -61,11 +60,11 @@ public class UserInfo {
         return this;
     }
 
-    public Date getBirthYear() {
+    public int getBirthYear() {
         return birthYear;
     }
 
-    public UserInfo setBirthYear(Date birthYear) {
+    public UserInfo setBirthYear(int birthYear) {
         this.birthYear = birthYear;
         return this;
     }
@@ -115,11 +114,11 @@ public class UserInfo {
         return this;
     }
 
-    public Date getEnrollmentYear() {
+    public int getEnrollmentYear() {
         return enrollmentYear;
     }
 
-    public UserInfo setEnrollmentYear(Date enrollmentYear) {
+    public UserInfo setEnrollmentYear(int enrollmentYear) {
         this.enrollmentYear = enrollmentYear;
         return this;
     }

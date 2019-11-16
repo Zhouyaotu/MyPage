@@ -1,6 +1,7 @@
 package com.mp.mypage.user.servlet;
 
-import ch.qos.logback.core.pattern.util.RegularEscapeUtil;
+import com.mp.mypage.common.Constant;
+import com.mp.mypage.common.util.FileUtil;
 import com.mp.mypage.common.Result;
 import com.mp.mypage.user.entity.UserBase;
 import com.mp.mypage.user.entity.UserInfo;
@@ -8,19 +9,23 @@ import com.mp.mypage.user.service.AccountService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 
 @Controller
+@RequestMapping(value = "api/user")
 public class AccountController {
     @Resource
     AccountService accountService;
 
+    @Resource
+    FileUtil fileUtil;
+
     @RequestMapping(value = "/register")
     @ResponseBody
-    public Result register(@RequestParam("user") UserBase userBase, Model model){
+    public Result register(UserBase userBase, Model model){
         Result result = accountService.register(userBase);
         model.addAttribute("result", result);
         return result;
@@ -44,11 +49,10 @@ public class AccountController {
 
     @RequestMapping("/modify-headimg")
     @ResponseBody
-    public Result modifyHeadImg(long id, Model model){
-        // TODO : receive img file uploaded from client
-        String imgUrl = "testImg";
-        Result result = accountService.modifyHeadImg(id, imgUrl);
-        model.addAttribute("result", result);
+    public Result modifyHeadImg(long id, MultipartFile file, Model model){
+        Result result = fileUtil.upload(file, Constant.IMG_HEAD);
+        if(result.getId() == 0)
+            result = accountService.modifyHeadImg(id, (String)result.getAttribute());
         return result;
     }
 
@@ -64,6 +68,14 @@ public class AccountController {
     @ResponseBody
     public Result getUserInfo(long id, Model model){
         Result result = accountService.getUserInfo(id);
+        model.addAttribute("result", result);
+        return result;
+    }
+
+    @RequestMapping(value = "/get-all-user-info")
+    @ResponseBody
+    public Result getAllUserInfo(Model model){
+        Result result =accountService.getAllUserInfo();
         model.addAttribute("result", result);
         return result;
     }
