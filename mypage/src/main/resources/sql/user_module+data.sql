@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 20/10/2019 20:55:54
+ Date: 16/11/2019 15:05:44
 */
 
 SET NAMES utf8mb4;
@@ -32,7 +32,13 @@ CREATE TABLE `user_base`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE,
   UNIQUE INDEX `safe_email`(`safe_email`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user_base
+-- ----------------------------
+INSERT INTO `user_base` VALUES (1, 'LXY', '654321', '/api/file/img/head/59049b0ac51240b5a39c5ee145c916d5.PNG', 0, 'LXY@mail.com', 0);
+INSERT INTO `user_base` VALUES (2, 'ZYC', '123456', 'default_img', 0, 'ZYC@mail.com', 0);
 
 -- ----------------------------
 -- Table structure for user_follower
@@ -72,21 +78,25 @@ CREATE TABLE `user_group`  (
 DROP TABLE IF EXISTS `user_info`;
 CREATE TABLE `user_info`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '编号',
-  `user_id` bigint(20) NOT NULL COMMENT '用户编号',
   `sex` bit(1) NULL DEFAULT NULL COMMENT '性别（0：男/1:女）',
   `birth_year` year NULL DEFAULT NULL COMMENT '出生年份',
   `home_province` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '家乡-省份',
   `home_city` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '家乡-城市',
   `live_province` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所在地-省份',
   `live_city` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '所在地-城市',
-  `major` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '专业',
-  `enrollment_year` year NOT NULL COMMENT '入学年份（YYYY）',
+  `major` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '专业',
+  `enrollment_year` year NULL DEFAULT NULL COMMENT '入学年份（YYYY）',
   `work_status` bit(1) NULL DEFAULT NULL COMMENT '工作状态（0：在读/1：工作）',
   `emotion_status` bit(1) NULL DEFAULT NULL COMMENT '情感状态（0：单身/1：非单身）',
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `user_id`(`user_id`) USING BTREE,
-  CONSTRAINT `user_info_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user_base` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `head_img` varchar(2083) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of user_info
+-- ----------------------------
+INSERT INTO `user_info` VALUES (1, b'0', 1998, 'Beijin', 'Beijin', 'Shaanxi', 'Xi\' an', 'CS', 2017, b'0', b'1', '/api/file/img/head/59049b0ac51240b5a39c5ee145c916d5.PNG');
+INSERT INTO `user_info` VALUES (2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for user_label

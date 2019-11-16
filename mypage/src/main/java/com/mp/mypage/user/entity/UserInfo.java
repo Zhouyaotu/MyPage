@@ -25,6 +25,8 @@ public class UserInfo {
 
     private Boolean emotionStatus;
 
+    private String headImg;
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -39,6 +41,7 @@ public class UserInfo {
                 ", enrollmentYear=" + enrollmentYear +
                 ", workStatus=" + workStatus +
                 ", emotionStatus=" + emotionStatus +
+                ", headImg='" + headImg + '\'' +
                 '}';
     }
 
@@ -138,6 +141,15 @@ public class UserInfo {
 
     public UserInfo setEmotionStatus(Boolean emotionStatus) {
         this.emotionStatus = emotionStatus;
+        return this;
+    }
+
+    public String getHeadImg() {
+        return headImg;
+    }
+
+    public UserInfo setHeadImg(String headImg) {
+        this.headImg = headImg;
         return this;
     }
 }

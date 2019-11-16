@@ -85,6 +85,8 @@ public class AccountService {
     public Result modifyHeadImg(long id, String imgUrl){
         UserBase userBase = new UserBase().setId(id).setHeadImg(imgUrl);
         userBaseMapper.updateByPrimaryKeySelective(userBase);
+        UserInfo userInfo = new UserInfo().setId(id).setHeadImg(imgUrl);
+        userInfoMapper.updateByPrimaryKeySelective(userInfo);
         return new Result(Constant.OPERATOR_SUCCESS, "头像更换成功")
                 .addAttribute("imgUrl", imgUrl);
     }
