@@ -5,58 +5,102 @@ import com.mp.mypage.user.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 
+/**
+ * @description  该类提供了用户模块的api
+ * @author 刘鑫源
+ * @time 2019/11/12
+ * @lastUpdateMan 刘鑫源
+ * @lastUpdateTime 2019/11/16
+ * @version 1.0
+ */
 @Controller
+@RequestMapping(value = "/api/user")
 public class UserController {
     @Resource
     UserService userService;
 
     @RequestMapping(value = "/follow")
-    public void follow(long srcId, long destId, long groupId, Model model){
+    @ResponseBody
+    public Result follow(long srcId, long destId, long groupId, Model model){
         Result result = userService.follow(srcId, destId, groupId);
         model.addAttribute("result", result);
+        return  result;
     }
 
     @RequestMapping(value = "/unfollow")
-    public void unfollow(long srcId, long destId, Model model){
+    @ResponseBody
+    public Result unfollow(long srcId, long destId, Model model){
         Result result = userService.unfollow(srcId, destId);
         model.addAttribute("result", result);
+        return result;
     }
 
-    @RequestMapping(value = "modify-user-group")
-    public void modifyUserGroup(long srcId, long destId, long newGroupId, Model model){
-        Result result = userService.modifyUserGroup(srcId, destId, newGroupId);
+    @RequestMapping(value = "/modify-dest-group")
+    @ResponseBody
+    public Result modifyDestGroup(long srcId, long destId, long newGroupId, Model model){
+        Result result = userService.modifyDestGroup(srcId, destId, newGroupId);
         model.addAttribute("result", result);
+        return result;
+    }
+
+    @RequestMapping(value = "/create-group")
+    @ResponseBody
+    public Result createUserGroup(@RequestParam("uid") long srcId, String groupName, Model model){
+        Result result = userService.createUserGroup(srcId, groupName);
+        model.addAttribute("result", result);
+        return result;
+    }
+
+    @RequestMapping(value = "/remove-group")
+    @ResponseBody
+    public Result removeUserGroup(@RequestParam("gid")long groupId){
+        return userService.removeUserGroup(groupId);
+    }
+
+    @RequestMapping(value = "/rename-group")
+    @ResponseBody
+    public Result renameUserGroup(@RequestParam("gid")long groupId, String newGroupName){
+        return userService.renameUserGroup(groupId, newGroupName);
     }
 
     @RequestMapping(value = "/get-all-followers")
-    public void getAllFollowersByUserId(long srcId, Model model){
-        Result result = userService.getAllFollowersByUserId(srcId);
-        model.addAttribute("follower", result.getAttribute());
-        model.addAttribute("result", result.addAttribute(null));
+    @ResponseBody
+    public Result getAllFollowersByUserId(@RequestParam("uid")long srcId){
+        return userService.getAllFollowersByUserId(srcId);
+    }
+
+    @RequestMapping(value = "/get-all-groups")
+    @ResponseBody
+    public Result getAllUserGroupByUserId(@RequestParam("uid")long srcId){
+        return userService.getAllUserGroupByUserId(srcId);
+    }
+
+    @RequestMapping(value = "/get-all-idols")
+    @ResponseBody
+    public Result getAllIdolByGroupId(@RequestParam("gid")long groupId){
+        return userService.getAllIdolByGroupId(groupId);
     }
 
     @RequestMapping(value = "/tag-label")
-    public void tagLabel(long userId, String content, byte type, Model model){
-        Result result = userService.tagLabel(userId, content, type);
-        model.addAttribute("result", result);
+    @ResponseBody
+    public Result tagLabel(long userId, String content, byte type){
+        return userService.tagLabel(userId, content, type);
     }
 
     @RequestMapping(value = "/untag-label")
-    public void untagLabel(long userLabelId, Model model){
-        Result result = userService.untagLabel(userLabelId);
-        model.addAttribute("result", result);
+    @ResponseBody
+    public Result untagLabel(long userLabelId){
+        return userService.untagLabel(userLabelId);
     }
 
     @RequestMapping(value = "/get-all-labels")
-    public void getAllLabelsByUserId(long userId, Model model){
-        Result result = userService.getAllLabelsByUserId(userId);
-        model.addAttribute("labels", result.getAttribute());
-        model.addAttribute("result", result.addAttribute(null));
+    @ResponseBody
+    public Result getAllLabelsByUserId(long userId){
+        return userService.getAllLabelsByUserId(userId);
     }
-
-
-
 }

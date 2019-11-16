@@ -11,21 +11,21 @@ import java.util.HashMap;
  * @version 1.0
  */
 public class Result {
-    private int id;
+    private int code;
     private String description;
     private Object attribute;
 
-    public Result(int id, String description) {
-        this.id = id;
+    public Result(int code, String description) {
+        this.code = code;
         this.description = description;
     }
 
-    public int getId() {
-        return id;
+    public int getCode() {
+        return code;
     }
 
-    public Result setId(int id) {
-        this.id = id;
+    public Result setCode(int code) {
+        this.code = code;
         return this;
     }
 
@@ -66,7 +66,7 @@ public class Result {
     @Override
     public String toString() {
         return "Result{" +
-                "id=" + id +
+                "id=" + code +
                 ", description='" + description + '\'' +
                 '}';
     }

@@ -29,7 +29,7 @@ public class FileUtil {
     /**
      * 该方法用于上传文件到指定目录
      * @param file 待上传的文件
-     * @param directory 文件保存目录， 可选值有Constan类中的IMG_HEAD/IMG_COMMON/VOICE/VEDIO
+     * @param directory 文件保存目录， 可选值有Constant类中的IMG_HEAD/IMG_COMMON/VOICE/VEDIO
      * @return 上传结果， 操作成功时包含文件访问位置fileUrl
      */
     public Result upload(MultipartFile file, String directory){

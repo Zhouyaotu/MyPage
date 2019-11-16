@@ -17,6 +17,8 @@ public class Constant {
 
     public static final int NOT_IMPLEMENT = -1;
 
+    public static final int RESULT_EMPTY = 1;
+
     public static final int ACCOUNT_EXIST = 2;
     public static final int ACCOUNT_NOT_EXIST = 3;
     public static final int ACCOUNT_BAN = 4;
@@ -27,6 +29,9 @@ public class Constant {
     public static final int FILE_EMPTY = 7;
     public static final int FILE_STORGE_FAIL = 8;
     public static final int FILE_TOO_BIG = 9;
+
+    public static final int GROUP_NOT_EXIST = 10;
+    public static final int FOLLOW_REPEAT = 11;
 
     //==============================================
     //                字段状态常量

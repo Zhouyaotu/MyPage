@@ -72,8 +72,10 @@ public class AccountService {
      */
     public Result modifyPassword(long id, String newPassword){
         UserBase userBase = new UserBase().setId(id).setPassword(newPassword);
-        userBaseMapper.updateByPrimaryKeySelective(userBase);
-        return new Result(Constant.OPERATOR_SUCCESS, "密码修改成功");
+        if(userBaseMapper.updateByPrimaryKeySelective(userBase) != 0)
+            return new Result(Constant.OPERATOR_SUCCESS, "密码修改成功");
+        else
+            return new Result(Constant.ACCOUNT_NOT_EXIST, "账户不存在");
     }
 
     /**
@@ -86,9 +88,11 @@ public class AccountService {
         UserBase userBase = new UserBase().setId(id).setHeadImg(imgUrl);
         userBaseMapper.updateByPrimaryKeySelective(userBase);
         UserInfo userInfo = new UserInfo().setId(id).setHeadImg(imgUrl);
-        userInfoMapper.updateByPrimaryKeySelective(userInfo);
-        return new Result(Constant.OPERATOR_SUCCESS, "头像更换成功")
+        if(userInfoMapper.updateByPrimaryKeySelective(userInfo) != 0)
+            return new Result(Constant.OPERATOR_SUCCESS, "头像更换成功")
                 .addAttribute("imgUrl", imgUrl);
+        else
+            return new Result(Constant.ACCOUNT_NOT_EXIST, "账户不存在");
     }
 
     /**
@@ -99,8 +103,10 @@ public class AccountService {
      */
     public Result modifyUserInfo(long id, UserInfo userInfo){
         userInfo.setId(id);
-        userInfoMapper.updateByPrimaryKeySelective(userInfo);
-        return new Result(Constant.OPERATOR_SUCCESS, "信息设置成功");
+        if(userInfoMapper.updateByPrimaryKeySelective(userInfo) != 0)
+            return new Result(Constant.OPERATOR_SUCCESS, "信息设置成功");
+        else
+            return new Result(Constant.ACCOUNT_NOT_EXIST, "账户不存在");
     }
 
     /**
@@ -110,7 +116,10 @@ public class AccountService {
      */
     public Result getUserInfo(long id){
         UserInfo userInfo = userInfoMapper.selectByPrimaryKey(id);
-        return new Result(Constant.OPERATOR_SUCCESS, "信息获取成功").addAttribute(userInfo);
+        if(userInfo != null)
+            return new Result(Constant.OPERATOR_SUCCESS, "信息获取成功").addAttribute(userInfo);
+        else
+            return new Result(Constant.ACCOUNT_NOT_EXIST, "账户不存在");
     }
 
     /**
@@ -119,6 +128,8 @@ public class AccountService {
      */
     public Result getAllUserInfo(){
         List<UserInfo> userInfos = userInfoMapper.selectAll();
-        return new Result(Constant.OPERATOR_SUCCESS, "信息获取成功").addAttribute(userInfos);
+        if(userInfos != null)
+            return new Result(Constant.OPERATOR_SUCCESS, "信息获取成功").addAttribute(userInfos);
+        return new Result(Constant.RESULT_EMPTY, "结果为空");
     }
 }

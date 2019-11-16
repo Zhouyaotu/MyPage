@@ -14,6 +14,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
 
+/**
+ * @description  该类提供了账户模块的api
+ * @author 刘鑫源
+ * @time 2019/11/12
+ * @lastUpdateMan 刘鑫源
+ * @lastUpdateTime 2019/11/16
+ * @version 1.0
+ */
 @Controller
 @RequestMapping(value = "api/user")
 public class AccountController {
