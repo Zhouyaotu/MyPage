@@ -20,23 +20,26 @@ public class UserGroup {
         return id;
     }
 
-    public void setId(Long id) {
+    public UserGroup setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Long userId) {
+    public UserGroup setUserId(Long userId) {
         this.userId = userId;
+        return this;
     }
 
     public String getGroupName() {
         return groupName;
     }
 
-    public void setGroupName(String groupName) {
-        this.groupName = groupName == null ? null : groupName.trim();
+    public UserGroup setGroupName(String groupName) {
+        this.groupName = groupName;
+        return this;
     }
 }

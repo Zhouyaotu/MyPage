@@ -24,20 +24,19 @@
         from user_base
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" parameterType="com.mp.mypage.user.entity.UserBase">
-        insert into user_base (id, username, `password`,
+    <insert id="insert" parameterType="com.mp.mypage.user.entity.UserBase"
+             useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        insert into user_base (username, `password`,
                                head_img, account_type, safe_email,
                                account_status)
-        values (#{id,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+        values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
                 #{headImg,jdbcType=VARCHAR}, #{accountType,jdbcType=TINYINT}, #{safeEmail,jdbcType=VARCHAR},
                 #{accountStatus,jdbcType=TINYINT})
     </insert>
-    <insert id="insertSelective" parameterType="com.mp.mypage.user.entity.UserBase">
+    <insert id="insertSelective" parameterType="com.mp.mypage.user.entity.UserBase"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into user_base
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
             <if test="username != null">
                 username,
             </if>
@@ -58,9 +57,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=BIGINT},
-            </if>
             <if test="username != null">
                 #{username,jdbcType=VARCHAR},
             </if>
@@ -115,4 +111,15 @@
             account_status = #{accountStatus,jdbcType=TINYINT}
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <select id="selectAll" resultMap="BaseResultMap">
+        select *
+        from user_base;
+    </select>
+
+    <select id="selectByUsername" resultMap="BaseResultMap">
+        select *
+        from user_base
+        where username = #{username}
+    </select>
 </mapper>

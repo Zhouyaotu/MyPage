@@ -26,39 +26,44 @@ public class UserFollower {
         return id;
     }
 
-    public void setId(Long id) {
+    public UserFollower setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public Long getSubjectUserId() {
         return subjectUserId;
     }
 
-    public void setSubjectUserId(Long subjectUserId) {
+    public UserFollower setSubjectUserId(Long subjectUserId) {
         this.subjectUserId = subjectUserId;
+        return this;
     }
 
     public Long getObjectUserId() {
         return objectUserId;
     }
 
-    public void setObjectUserId(Long objectUserId) {
+    public UserFollower setObjectUserId(Long objectUserId) {
         this.objectUserId = objectUserId;
+        return this;
     }
 
     public Long getUserGroupId() {
         return userGroupId;
     }
 
-    public void setUserGroupId(Long userGroupId) {
+    public UserFollower setUserGroupId(Long userGroupId) {
         this.userGroupId = userGroupId;
+        return this;
     }
 
     public Boolean getFollowStatus() {
         return followStatus;
     }
 
-    public void setFollowStatus(Boolean followStatus) {
+    public UserFollower setFollowStatus(Boolean followStatus) {
         this.followStatus = followStatus;
+        return this;
     }
 }

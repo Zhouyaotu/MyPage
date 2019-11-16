@@ -80,4 +80,10 @@
             label_type    = #{labelType,jdbcType=TINYINT}
         where id = #{id,jdbcType=BIGINT}
     </update>
+
+    <select id="selectAllLabelsByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select *
+        from user_label
+        where user_id = #{userId, jdbcType=BIGINT}
+    </select>
 </mapper>
