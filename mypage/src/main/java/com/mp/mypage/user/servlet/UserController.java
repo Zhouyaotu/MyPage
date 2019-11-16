@@ -35,7 +35,7 @@ public class UserController {
     public void getAllFollowersByUserId(long srcId, Model model){
         Result result = userService.getAllFollowersByUserId(srcId);
         model.addAttribute("follower", result.getAttribute());
-        model.addAttribute("result", result.setAttribute(null));
+        model.addAttribute("result", result.addAttribute(null));
     }
 
     @RequestMapping(value = "/tag-label")
@@ -54,7 +54,7 @@ public class UserController {
     public void getAllLabelsByUserId(long userId, Model model){
         Result result = userService.getAllLabelsByUserId(userId);
         model.addAttribute("labels", result.getAttribute());
-        model.addAttribute("result", result.setAttribute(null));
+        model.addAttribute("result", result.addAttribute(null));
     }
 
 

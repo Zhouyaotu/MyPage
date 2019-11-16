@@ -6,15 +6,19 @@ import com.mp.mypage.user.dao.UserGroupMapper;
 import com.mp.mypage.user.dao.UserLabelMapper;
 import com.mp.mypage.user.entity.UserFollower;
 import com.mp.mypage.user.entity.UserLabel;
-import com.mp.mypage.user.util.UserUtil;
+import com.mp.mypage.common.Constant;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * 该类提供了对用户之间交互的处理方法
+ * @description  该类提供了对用户之间交互的处理方法
  * @author 刘鑫源
+ * @time 2019/11/12
+ * @lastUpdateMan 刘鑫源
+ * @lastUpdateTime 2019/11/16
+ * @version 1.0
  */
 @Service
 public class UserService {
@@ -38,7 +42,7 @@ public class UserService {
         UserFollower userFollower = new UserFollower().setSubjectUserId(srcId).
                 setObjectUserId(destId).setUserGroupId(groupId);
         userFollowerMapper.insertSelective(userFollower);
-        return new Result(UserUtil.OPERATOR_SUCCESS, "关注成功");
+        return new Result(Constant.OPERATOR_SUCCESS, "关注成功");
     }
 
     /**
@@ -51,7 +55,7 @@ public class UserService {
         UserFollower userFollower = new UserFollower().setSubjectUserId(srcId).
                 setObjectUserId(destId);
         userFollowerMapper.deleteByUserIdPair(srcId, destId);
-        return new Result(UserUtil.OPERATOR_SUCCESS, "取消关注成功");
+        return new Result(Constant.OPERATOR_SUCCESS, "取消关注成功");
     }
 
     /**
@@ -65,7 +69,7 @@ public class UserService {
         UserFollower userFollower = new UserFollower().setSubjectUserId(srcId).
                 setObjectUserId(destId).setUserGroupId(newGroupId != 0 ? newGroupId : 0);
         userFollowerMapper.updateByUserIdPair(userFollower);
-        return new Result(UserUtil.OPERATOR_SUCCESS, "修改成功");
+        return new Result(Constant.OPERATOR_SUCCESS, "修改成功");
     }
 
     /**
@@ -75,7 +79,7 @@ public class UserService {
      */
     public Result getAllFollowersByUserId(long srcId){
         //TODO: 查询用户所有的关注者，返回其基本信息
-        return new Result(UserUtil.NOT_IMPLEMENT,"未实现");
+        return new Result(Constant.NOT_IMPLEMENT,"未实现");
     }
 
     /**
@@ -89,7 +93,7 @@ public class UserService {
         UserLabel userLabel = new UserLabel().setUserId(userId)
                 .setLabelContent(content).setLabelType(type);
         userLabelMapper.insert(userLabel);
-        return new Result(UserUtil.OPERATOR_SUCCESS, "标签添加成功");
+        return new Result(Constant.OPERATOR_SUCCESS, "标签添加成功");
     }
 
     /**
@@ -99,7 +103,7 @@ public class UserService {
      */
     public Result untagLabel(long userLabelId){
         userLabelMapper.deleteByPrimaryKey(userLabelId);
-        return new Result(UserUtil.OPERATOR_SUCCESS, "标签添加成功");
+        return new Result(Constant.OPERATOR_SUCCESS, "标签添加成功");
     }
 
     /**
@@ -109,7 +113,7 @@ public class UserService {
      */
     public Result getAllLabelsByUserId(long userId){
         List<UserLabel> labels = userLabelMapper.selectAllLabelsByUserId(userId);
-        return new Result(UserUtil.OPERATOR_SUCCESS, "标签获取成功").setAttribute(labels);
+        return new Result(Constant.OPERATOR_SUCCESS, "标签获取成功").addAttribute(labels);
     }
 
 
