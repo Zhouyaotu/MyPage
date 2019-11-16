@@ -51,7 +51,7 @@ public class AccountController {
     @ResponseBody
     public Result modifyHeadImg(long id, MultipartFile file, Model model){
         Result result = fileUtil.upload(file, Constant.IMG_HEAD);
-        if(result.getId() == 0)
+        if(result.getCode() == 0)
             result = accountService.modifyHeadImg(id, (String)result.getAttribute());
         return result;
     }
