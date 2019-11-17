@@ -20,16 +20,15 @@
         from user_group
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" parameterType="com.mp.mypage.user.entity.UserGroup">
-        insert into user_group (id, user_id, group_name)
-        values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{groupName,jdbcType=VARCHAR})
+    <insert id="insert" parameterType="com.mp.mypage.user.entity.UserGroup"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+        insert into user_group (user_id, group_name)
+        values (#{userId,jdbcType=BIGINT}, #{groupName,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="com.mp.mypage.user.entity.UserGroup">
+    <insert id="insertSelective" parameterType="com.mp.mypage.user.entity.UserGroup"
+            useGeneratedKeys="true" keyColumn="id" keyProperty="id">
         insert into user_group
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
             <if test="userId != null">
                 user_id,
             </if>
@@ -38,9 +37,6 @@
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=BIGINT},
-            </if>
             <if test="userId != null">
                 #{userId,jdbcType=BIGINT},
             </if>
@@ -71,5 +67,12 @@
     <select id="selectAll" resultMap="BaseResultMap">
         select *
         from user_group;
+    </select>
+
+    <select id="selectUserGroupByUserId" parameterType="java.lang.Long"
+            resultType="com.mp.mypage.user.dto.UserGroupDTO">
+        select id, group_name
+        from user_group
+        where user_id = #{userId, jdbcType=BIGINT}
     </select>
 </mapper>
