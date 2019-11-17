@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="block"><el-avatar :size="80" :src="circleUrl"></el-avatar></div>
+    <div class="block"><el-avatar :size="90" :src="squareUrl"></el-avatar></div>
   </div>  
 </template>
 <script>

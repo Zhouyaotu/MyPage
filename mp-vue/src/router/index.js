@@ -4,7 +4,7 @@ import Router from 'vue-router'
 import AppIndex from '@/components/home/AppIndex'
 import Login from '@/components/Login'
 import Home from '@/components/Home'
-import Tabs from '@/components/stulist/Tabs'
+import RecommendsTabs from '@/components/stulist/RecommendsTabs'
 
 Vue.use(Router)
 
@@ -34,8 +34,8 @@ export default new Router({
       },
       {
         path: '/recommend',
-        name: 'Tabs',
-        component: Tabs
+        name: 'RecommendsTabs',
+        component: RecommendsTabs
       },
       ]
     }
