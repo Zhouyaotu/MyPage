@@ -1,5 +1,6 @@
 package com.mp.mypage.user.dao;
 
+import com.mp.mypage.user.dto.UserInfoDTO;
 import com.mp.mypage.user.entity.UserInfo;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -16,6 +17,10 @@ public interface UserInfoMapper {
     UserInfo selectByPrimaryKey(Long id);
 
     List<UserInfo> selectAll();
+
+    UserInfoDTO selectDTOByUserId(Long id);
+
+    List<UserInfoDTO> selectAllDTO();
 
     int updateByPrimaryKeySelective(UserInfo record);
 

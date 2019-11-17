@@ -98,16 +98,64 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <update id="updateByUserIdPair" parameterType="com.mp.mypage.user.entity.UserFollower">
+    <update id="updateByUserIdPairSelective" parameterType="com.mp.mypage.user.entity.UserFollower">
         update user_follower
-        set user_group_id  = #{userGroupId,jdbcType=BIGINT}
+        <set>
+            <if test="userGroupId != null">
+                user_group_id = #{userGroupId,jdbcType=BIGINT},
+            </if>
+            <if test="followStatus != null">
+                follow_status = #{followStatus,jdbcType=BIT},
+            </if>
+        </set>
         where subject_user_id = #{subjectUserId, jdbcType=BIGINT} AND
               object_user_id = #{objectUserId, jdbcType=BIGINT}
     </update>
 
-    <select id="selectAllFollowerByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectAllFollowerByUserId" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select subject_user_id
+        from user_follower
+        where object_user_id = #{destId, jdbcType=BIGINT}
+    </select>
+
+    <select id="selectAllIdolByGroupId" parameterType="java.lang.Long" resultType="java.lang.Long">
+        select object_user_id
+        from user_follower
+        where user_group_id = #{groupId, jdbcType=BIGINT}
+    </select>
+
+    <select id="selectByUserPair" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select *
         from user_follower
-        where subject_user_id = #{srcId, jdbcType=BIGINT}
+        where object_user_id = #{objectUserId, jdbcType=BIGINT} AND
+              subject_user_id = #{subjectUserId, jdbcType=BIGINT}
     </select>
+
+    <resultMap id="UserSimpleInfoDTOResultMap" type="com.mp.mypage.user.dto.UserSimpleInfoDTO">
+        <id column="uid" jdbcType="BIGINT" property="uid"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="head_img" jdbcType="VARCHAR" property="headImg"/>
+    </resultMap>
+
+    <resultMap id="UserIdolDTOResultMap" type="com.mp.mypage.user.dto.UserIdolDTO">
+        <id column="group_id" jdbcType="BIGINT" property="groupId"/>
+        <result column="group_name" jdbcType="VARCHAR" property="groupName"/>
+        <collection property="users" ofType="com.mp.mypage.user.dto.UserSimpleInfoDTO" resultMap="UserSimpleInfoDTOResultMap"/>
+    </resultMap>
+
+    <select id="selectAllIdolByUserId" resultMap="UserIdolDTOResultMap">
+        select
+            uf.user_group_id as group_id,
+            ug.group_name as group_name,
+            ub.id as uid,
+            ub.username as username,
+            ui.head_img as head_img
+        from user_follower uf
+            left outer join user_group ug on uf.user_group_id = ug.id
+            left outer join user_base ub on uf.object_user_id = ub.id
+            left outer join user_info ui on ub.id = ui.id
+        where uf.subject_user_id = #{srcId, jdbcType=BIGINT}
+    </select>
+
+
 </mapper>

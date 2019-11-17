@@ -3,6 +3,7 @@ package com.mp.mypage.user.service;
 import com.mp.mypage.common.Result;
 import com.mp.mypage.user.dao.UserBaseMapper;
 import com.mp.mypage.user.dao.UserInfoMapper;
+import com.mp.mypage.user.dto.UserInfoDTO;
 import com.mp.mypage.user.entity.UserBase;
 import com.mp.mypage.user.entity.UserInfo;
 import com.mp.mypage.common.Constant;
@@ -16,7 +17,7 @@ import java.util.List;
  * @author 刘鑫源
  * @time 2019/11/12
  * @lastUpdateMan 刘鑫源
- * @lastUpdateTime 2019/11/16
+ * @lastUpdateTime 2019/11/17
  * @version 1.0
  */
 @Service
@@ -72,8 +73,10 @@ public class AccountService {
      */
     public Result modifyPassword(long id, String newPassword){
         UserBase userBase = new UserBase().setId(id).setPassword(newPassword);
-        userBaseMapper.updateByPrimaryKeySelective(userBase);
-        return new Result(Constant.OPERATOR_SUCCESS, "密码修改成功");
+        if(userBaseMapper.updateByPrimaryKeySelective(userBase) != 0)
+            return new Result(Constant.OPERATOR_SUCCESS, "密码修改成功");
+        else
+            return new Result(Constant.ACCOUNT_NOT_EXIST, "账户不存在");
     }
 
     /**
@@ -86,9 +89,11 @@ public class AccountService {
         UserBase userBase = new UserBase().setId(id).setHeadImg(imgUrl);
         userBaseMapper.updateByPrimaryKeySelective(userBase);
         UserInfo userInfo = new UserInfo().setId(id).setHeadImg(imgUrl);
-        userInfoMapper.updateByPrimaryKeySelective(userInfo);
-        return new Result(Constant.OPERATOR_SUCCESS, "头像更换成功")
+        if(userInfoMapper.updateByPrimaryKeySelective(userInfo) != 0)
+            return new Result(Constant.OPERATOR_SUCCESS, "头像更换成功")
                 .addAttribute("imgUrl", imgUrl);
+        else
+            return new Result(Constant.ACCOUNT_NOT_EXIST, "账户不存在");
     }
 
     /**
@@ -99,8 +104,10 @@ public class AccountService {
      */
     public Result modifyUserInfo(long id, UserInfo userInfo){
         userInfo.setId(id);
-        userInfoMapper.updateByPrimaryKeySelective(userInfo);
-        return new Result(Constant.OPERATOR_SUCCESS, "信息设置成功");
+        if(userInfoMapper.updateByPrimaryKeySelective(userInfo) != 0)
+            return new Result(Constant.OPERATOR_SUCCESS, "信息设置成功");
+        else
+            return new Result(Constant.ACCOUNT_NOT_EXIST, "账户不存在");
     }
 
     /**
@@ -109,8 +116,11 @@ public class AccountService {
      * @return 处理结果， 包含 用户详细信息
      */
     public Result getUserInfo(long id){
-        UserInfo userInfo = userInfoMapper.selectByPrimaryKey(id);
-        return new Result(Constant.OPERATOR_SUCCESS, "信息获取成功").addAttribute(userInfo);
+        UserInfoDTO userInfo = userInfoMapper.selectDTOByUserId(id);
+        if(userInfo != null)
+            return new Result(Constant.OPERATOR_SUCCESS, "信息获取成功").addAttribute(userInfo);
+        else
+            return new Result(Constant.ACCOUNT_NOT_EXIST, "账户不存在");
     }
 
     /**
@@ -118,7 +128,9 @@ public class AccountService {
      * @return 处理结果， 包含 用户详细信息列表
      */
     public Result getAllUserInfo(){
-        List<UserInfo> userInfos = userInfoMapper.selectAll();
-        return new Result(Constant.OPERATOR_SUCCESS, "信息获取成功").addAttribute(userInfos);
+        List<UserInfoDTO> userInfos = userInfoMapper.selectAllDTO();
+        if(userInfos != null)
+            return new Result(Constant.OPERATOR_SUCCESS, "信息获取成功").addAttribute(userInfos);
+        return new Result(Constant.RESULT_EMPTY, "结果为空");
     }
 }
