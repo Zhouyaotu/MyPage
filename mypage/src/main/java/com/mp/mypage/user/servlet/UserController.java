@@ -15,7 +15,7 @@ import javax.annotation.Resource;
  * @author 刘鑫源
  * @time 2019/11/12
  * @lastUpdateMan 刘鑫源
- * @lastUpdateTime 2019/11/16
+ * @lastUpdateTime 2019/11/17
  * @version 1.0
  */
 @Controller
@@ -80,10 +80,16 @@ public class UserController {
         return userService.getAllUserGroupByUserId(srcId);
     }
 
-    @RequestMapping(value = "/get-all-idols")
+    @RequestMapping(value = "/get-all-idols-gid")
     @ResponseBody
     public Result getAllIdolByGroupId(@RequestParam("gid")long groupId){
         return userService.getAllIdolByGroupId(groupId);
+    }
+
+    @RequestMapping(value = "/get-all-idols-uid")
+    @ResponseBody
+    public Result getAllIdolByUserId(@RequestParam("uid")long userId){
+        return userService.getAllIdolByUserId(userId);
     }
 
     @RequestMapping(value = "/tag-label")

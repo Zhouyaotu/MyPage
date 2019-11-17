@@ -178,4 +178,40 @@
         select *
         from user_info;
     </select>
+
+    <resultMap id="UserBaseDTOResultMap" type="com.mp.mypage.user.dto.UserBaseDTO">
+        <id column="uid" property="uid"/>
+        <result column="username" property="username"/>
+        <result column="account_type" property="accountType"/>
+        <result column="account_status" property="accountStatus"/>
+    </resultMap>
+
+    <resultMap id="UserInfoDTOResultMap" type="com.mp.mypage.user.dto.UserInfoDTO">
+        <association property="base" resultMap="UserBaseDTOResultMap"/>
+        <association property="detail" resultMap="BaseResultMap"/>
+    </resultMap>
+
+    <sql id="DTOsql">
+        ub.id as uid,
+            ub.username as username,
+            ub.account_type as account_type,
+            ub.account_status as account_status,
+            ui.id as id, sex, birth_year, home_province, home_city, live_province, live_city,
+               major, enrollment_year, work_status, emotion_status, ui.head_img as head_img
+    </sql>
+    <select id="selectDTOByUserId" resultMap="UserInfoDTOResultMap">
+        select
+            <include refid="DTOsql"/>
+        from user_info as ui
+            left outer join user_base ub on ui.id = ub.id
+        where
+            ub.id = #{id}
+    </select>
+
+    <select id="selectAllDTO" resultMap="UserInfoDTOResultMap">
+        select
+            <include refid="DTOsql"/>
+        from user_info as ui
+            left outer join user_base ub on ui.id = ub.id
+    </select>
 </mapper>

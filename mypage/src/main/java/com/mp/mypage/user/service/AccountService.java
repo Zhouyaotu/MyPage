@@ -3,6 +3,7 @@ package com.mp.mypage.user.service;
 import com.mp.mypage.common.Result;
 import com.mp.mypage.user.dao.UserBaseMapper;
 import com.mp.mypage.user.dao.UserInfoMapper;
+import com.mp.mypage.user.dto.UserInfoDTO;
 import com.mp.mypage.user.entity.UserBase;
 import com.mp.mypage.user.entity.UserInfo;
 import com.mp.mypage.common.Constant;
@@ -16,7 +17,7 @@ import java.util.List;
  * @author 刘鑫源
  * @time 2019/11/12
  * @lastUpdateMan 刘鑫源
- * @lastUpdateTime 2019/11/16
+ * @lastUpdateTime 2019/11/17
  * @version 1.0
  */
 @Service
@@ -115,7 +116,7 @@ public class AccountService {
      * @return 处理结果， 包含 用户详细信息
      */
     public Result getUserInfo(long id){
-        UserInfo userInfo = userInfoMapper.selectByPrimaryKey(id);
+        UserInfoDTO userInfo = userInfoMapper.selectDTOByUserId(id);
         if(userInfo != null)
             return new Result(Constant.OPERATOR_SUCCESS, "信息获取成功").addAttribute(userInfo);
         else
@@ -127,7 +128,7 @@ public class AccountService {
      * @return 处理结果， 包含 用户详细信息列表
      */
     public Result getAllUserInfo(){
-        List<UserInfo> userInfos = userInfoMapper.selectAll();
+        List<UserInfoDTO> userInfos = userInfoMapper.selectAllDTO();
         if(userInfos != null)
             return new Result(Constant.OPERATOR_SUCCESS, "信息获取成功").addAttribute(userInfos);
         return new Result(Constant.RESULT_EMPTY, "结果为空");

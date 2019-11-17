@@ -5,17 +5,15 @@ import com.mp.mypage.user.dao.UserFollowerMapper;
 import com.mp.mypage.user.dao.UserGroupMapper;
 import com.mp.mypage.user.dao.UserLabelMapper;
 import com.mp.mypage.user.dto.UserGroupDTO;
+import com.mp.mypage.user.dto.UserIdolDTO;
 import com.mp.mypage.user.entity.UserFollower;
 import com.mp.mypage.user.entity.UserGroup;
-import com.mp.mypage.user.entity.UserInfo;
 import com.mp.mypage.user.entity.UserLabel;
 import com.mp.mypage.common.Constant;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -23,7 +21,7 @@ import java.util.List;
  * @author 刘鑫源
  * @time 2019/11/12
  * @lastUpdateMan 刘鑫源
- * @lastUpdateTime 2019/11/16
+ * @lastUpdateTime 2019/11/17
  * @version 1.0
  */
 @Service
@@ -188,6 +186,20 @@ public class UserService {
         if(idolIds != null)
             return new Result(Constant.OPERATOR_SUCCESS, "关注列表获取成功")
                     .setAttribute(idolIds);
+        else
+            return new Result(Constant.RESULT_EMPTY, "结果为空");
+    }
+
+    /**
+     * 该方法用于直接根据用户id获取带有分组的被关注者信息
+     * @param srcId 用户id
+     * @return 结果信息， 包含带有详细信息的关注列表
+     */
+    public Result getAllIdolByUserId(long srcId){
+        List<UserIdolDTO> idols = userFollowerMapper.selectAllIdolByUserId(srcId);
+        if(idols != null)
+            return new Result(Constant.OPERATOR_SUCCESS, "关注列表获取成功")
+                    .setAttribute(idols);
         else
             return new Result(Constant.RESULT_EMPTY, "结果为空");
     }

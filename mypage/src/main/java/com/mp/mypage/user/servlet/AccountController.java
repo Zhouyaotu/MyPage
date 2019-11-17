@@ -8,6 +8,7 @@ import com.mp.mypage.user.entity.UserInfo;
 import com.mp.mypage.user.service.AccountService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +20,7 @@ import javax.annotation.Resource;
  * @author 刘鑫源
  * @time 2019/11/12
  * @lastUpdateMan 刘鑫源
- * @lastUpdateTime 2019/11/16
+ * @lastUpdateTime 2019/11/17
  * @version 1.0
  */
 @Controller
@@ -72,6 +73,7 @@ public class AccountController {
         return result;
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/get-user-info")
     @ResponseBody
     public Result getUserInfo(long id, Model model){
@@ -80,6 +82,7 @@ public class AccountController {
         return result;
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/get-all-user-info")
     @ResponseBody
     public Result getAllUserInfo(Model model){

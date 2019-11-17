@@ -1,5 +1,6 @@
 package com.mp.mypage.user.dao;
 
+import com.mp.mypage.user.dto.UserIdolDTO;
 import com.mp.mypage.user.entity.UserFollower;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.dao.DataAccessException;
@@ -23,6 +24,8 @@ public interface UserFollowerMapper {
     List<Long> selectAllFollowerByUserId(long destId);
 
     List<Long> selectAllIdolByGroupId(long groupId);
+
+    List<UserIdolDTO> selectAllIdolByUserId(long srcId);
 
     int updateByPrimaryKeySelective(UserFollower record);
 
