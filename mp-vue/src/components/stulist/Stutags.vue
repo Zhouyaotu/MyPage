@@ -13,8 +13,17 @@
     name:'Stutags',
     data () {  
       return {
-        
       }
-    }
+    },
+    methods:{
+      loadstu(){
+        this.$axios.get(
+          "",
+        )
+        .then(
+          
+        )
+      }
+    },
   }
 </script>

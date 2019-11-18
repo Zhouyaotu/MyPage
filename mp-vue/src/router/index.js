@@ -6,6 +6,7 @@ import Login from '@/components/Login'
 import Register from '@/components/register/Register'
 import Home from '@/components/Home'
 import RecommendsTabs from '@/components/stulist/RecommendsTabs'
+import Signin from '@/components/Signin'
 
 Vue.use(Router)
 
