@@ -32,55 +32,62 @@ public class UserBase {
         return id;
     }
 
-    public void setId(Long id) {
+    public UserBase setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username == null ? null : username.trim();
+    public UserBase setUsername(String username) {
+        this.username = username;
+        return this;
     }
 
     public String getPassword() {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public UserBase setPassword(String password) {
+        this.password = password;
+        return this;
     }
 
     public String getHeadImg() {
         return headImg;
     }
 
-    public void setHeadImg(String headImg) {
-        this.headImg = headImg == null ? null : headImg.trim();
+    public UserBase setHeadImg(String headImg) {
+        this.headImg = headImg;
+        return this;
     }
 
     public Byte getAccountType() {
         return accountType;
     }
 
-    public void setAccountType(Byte accountType) {
+    public UserBase setAccountType(Byte accountType) {
         this.accountType = accountType;
+        return this;
     }
 
     public String getSafeEmail() {
         return safeEmail;
     }
 
-    public void setSafeEmail(String safeEmail) {
-        this.safeEmail = safeEmail == null ? null : safeEmail.trim();
+    public UserBase setSafeEmail(String safeEmail) {
+        this.safeEmail = safeEmail;
+        return this;
     }
 
     public Byte getAccountStatus() {
         return accountStatus;
     }
 
-    public void setAccountStatus(Byte accountStatus) {
+    public UserBase setAccountStatus(Byte accountStatus) {
         this.accountStatus = accountStatus;
+        return this;
     }
 }

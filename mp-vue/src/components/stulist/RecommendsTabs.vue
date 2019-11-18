@@ -13,7 +13,7 @@
   import Scroll from '@/components/stulist/Scroll'
   import Sidetags from '@/components/stulist/Sidetags'
   export default {
-    name:'Tabs',
+    name:'RecommendsTabs',
     data() {
       return {
         activeName: 'second'
