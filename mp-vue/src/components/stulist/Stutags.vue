@@ -13,8 +13,25 @@
     name:'Stutags',
     data () {  
       return {
-        
+        a = ''
       }
+    },
+    methods:{
+      loadstu(){
+        this.$axios.get(
+          "",
+        )
+        .then(
+          
+        )
+      }
+    },
+    created:{
+      loadstu(){},
+      init=function(){this.a = 1}
+    },
+    mounted:{
+      loadstu()
     }
   }
 </script>

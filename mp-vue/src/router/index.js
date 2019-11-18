@@ -5,6 +5,7 @@ import AppIndex from '@/components/home/AppIndex'
 import Login from '@/components/Login'
 import Home from '@/components/Home'
 import Tabs from '@/components/stulist/Tabs'
+import Signin from '@/components/Signin'
 
 Vue.use(Router)
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/signin',
+      name: 'Signin',
+      component: Signin
     },
     {
       path: '/home',
