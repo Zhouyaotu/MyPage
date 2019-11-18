@@ -4,11 +4,7 @@
       class="list"
       v-infinite-scroll="load"
       infinite-scroll-disabled="disabled">
-<<<<<<< HEAD
-      <div v-for="i in count" v-bind:key="i" class="list-item">
-=======
       <div v-for="stu in stulist" v-bind:key="stu.id" class="list-item">
->>>>>>> upstream/dev
         <el-container type="flex">
           <el-aside width="200px"><Headimg/></el-aside>
           <el-main>
