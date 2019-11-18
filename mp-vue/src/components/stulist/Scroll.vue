@@ -29,13 +29,13 @@
     name:'Scroll',
     data () {
       return {
-        count: 30,
+        count: 50,
         loading: false
       }
     },
     computed: {
       noMore () {
-        return this.count >= 100
+        return this.count >= 200
       },
       disabled () {
         return this.loading || this.noMore
