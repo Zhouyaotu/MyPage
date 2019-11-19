@@ -4,7 +4,6 @@ import Router from 'vue-router'
 import AppIndex from '@/components/home/AppIndex'
 import Login from '@/components/Login'
 import Home from '@/components/Home'
-import Tabs from '@/components/stulist/Tabs'
 import Signin from '@/components/Signin'
 import RecommendsTabs from '@/components/stulist/RecommendsTabs'
 
