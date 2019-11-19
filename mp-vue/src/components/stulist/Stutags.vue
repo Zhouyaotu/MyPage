@@ -16,14 +16,7 @@
       }
     },
     methods:{
-      loadstu(){
-        this.$axios.get(
-          "",
-        )
-        .then(
-          
-        )
-      }
+      
     },
   }
 </script>
