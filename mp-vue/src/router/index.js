@@ -5,6 +5,7 @@ import AppIndex from '@/components/home/AppIndex'
 import Login from '@/components/Login'
 import Register from '@/components/register/Register'
 import Home from '@/components/Home'
+import Signin from '@/components/Signin'
 import RecommendsTabs from '@/components/stulist/RecommendsTabs'
 
 Vue.use(Router)

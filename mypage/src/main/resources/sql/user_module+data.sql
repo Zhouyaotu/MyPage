@@ -14,9 +14,13 @@
  Date: 17/11/2019 15:06:14
 */
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 use mypage;
 >>>>>>> backend fix
+=======
+use mypage;
+>>>>>>> 1c94d8fcdfd2382db1eb7544b671032b164f2172
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
 
