@@ -4,15 +4,15 @@
       class="list"
       v-infinite-scroll="load"
       infinite-scroll-disabled="disabled">
-      <div v-for="stu in stulist" v-bind:key="stu.id" class="list-item">
+      <div v-for="stu in stulist" v-bind:key="stu.base.uid" class="list-item">
         <el-container type="flex">
           <el-aside width="200px"><Headimg/></el-aside>
           <el-main>
             <el-row type="flex" justify="start">
-              {{stu.id}}
+              {{stu.base.username}}
             </el-row>
             <el-row type="flex" justify="start">
-              {{stu.homeProvince}}
+              {{stu.detail.homeProvince}}
             </el-row>
             <el-row type="flex" justify="start">
               <Stutags/>
