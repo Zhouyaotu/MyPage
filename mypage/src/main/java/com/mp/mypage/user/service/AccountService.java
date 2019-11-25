@@ -87,8 +87,6 @@ public class AccountService {
      * @return 结果信息, 包含图片访问位置url
      */
     public Result modifyHeadImg(long id, String imgUrl){
-        UserBase userBase = new UserBase().setId(id).setHeadImg(imgUrl);
-        userBaseMapper.updateByPrimaryKeySelective(userBase);
         UserInfo userInfo = new UserInfo().setId(id).setHeadImg(imgUrl);
         if(userInfoMapper.updateByPrimaryKeySelective(userInfo) != 0)
             return new Result(Constant.OPERATOR_SUCCESS, "头像更换成功")

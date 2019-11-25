@@ -7,8 +7,6 @@ public class UserBase {
 
     private String password;
 
-    private String headImg;
-
     private Byte accountType;
 
     private String safeEmail;
@@ -21,7 +19,6 @@ public class UserBase {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", headImg='" + headImg + '\'' +
                 ", accountType=" + accountType +
                 ", safeEmail='" + safeEmail + '\'' +
                 ", accountStatus=" + accountStatus +
@@ -52,15 +49,6 @@ public class UserBase {
 
     public UserBase setPassword(String password) {
         this.password = password;
-        return this;
-    }
-
-    public String getHeadImg() {
-        return headImg;
-    }
-
-    public UserBase setHeadImg(String headImg) {
-        this.headImg = headImg;
         return this;
     }
 

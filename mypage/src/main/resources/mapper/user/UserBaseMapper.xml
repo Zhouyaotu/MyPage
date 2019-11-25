@@ -5,13 +5,12 @@
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
-        <result column="head_img" jdbcType="VARCHAR" property="headImg"/>
         <result column="account_type" jdbcType="TINYINT" property="accountType"/>
         <result column="safe_email" jdbcType="VARCHAR" property="safeEmail"/>
         <result column="account_status" jdbcType="TINYINT" property="accountStatus"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, username, `password`, head_img, account_type, safe_email, account_status
+        id, username, `password`, account_type, safe_email, account_status
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -27,10 +26,10 @@
     <insert id="insert" parameterType="com.mp.mypage.user.entity.UserBase"
              useGeneratedKeys="true" keyProperty="id" keyColumn="id">
         insert into user_base (username, `password`,
-                               head_img, account_type, safe_email,
+                               account_type, safe_email,
                                account_status)
         values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
-                #{headImg,jdbcType=VARCHAR}, #{accountType,jdbcType=TINYINT}, #{safeEmail,jdbcType=VARCHAR},
+                #{accountType,jdbcType=TINYINT}, #{safeEmail,jdbcType=VARCHAR},
                 #{accountStatus,jdbcType=TINYINT})
     </insert>
     <insert id="insertSelective" parameterType="com.mp.mypage.user.entity.UserBase"
@@ -42,9 +41,6 @@
             </if>
             <if test="password != null">
                 `password`,
-            </if>
-            <if test="headImg != null">
-                head_img,
             </if>
             <if test="accountType != null">
                 account_type,
@@ -62,9 +58,6 @@
             </if>
             <if test="password != null">
                 #{password,jdbcType=VARCHAR},
-            </if>
-            <if test="headImg != null">
-                #{headImg,jdbcType=VARCHAR},
             </if>
             <if test="accountType != null">
                 #{accountType,jdbcType=TINYINT},
@@ -86,9 +79,6 @@
             <if test="password != null">
                 `password` = #{password,jdbcType=VARCHAR},
             </if>
-            <if test="headImg != null">
-                head_img = #{headImg,jdbcType=VARCHAR},
-            </if>
             <if test="accountType != null">
                 account_type = #{accountType,jdbcType=TINYINT},
             </if>
@@ -105,7 +95,6 @@
         update user_base
         set username       = #{username,jdbcType=VARCHAR},
             `password`     = #{password,jdbcType=VARCHAR},
-            head_img       = #{headImg,jdbcType=VARCHAR},
             account_type   = #{accountType,jdbcType=TINYINT},
             safe_email     = #{safeEmail,jdbcType=VARCHAR},
             account_status = #{accountStatus,jdbcType=TINYINT}
