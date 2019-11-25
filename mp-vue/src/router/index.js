@@ -3,6 +3,7 @@ import Router from 'vue-router'
 // 导入刚才编写的组件
 import AppIndex from '@/components/home/AppIndex'
 import Login from '@/components/Login'
+import Register from '@components/register/Register'
 import Home from '@/components/Home'
 import RecommendsTabs from '@/components/stulist/RecommendsTabs'
 
@@ -16,6 +17,11 @@ export default new Router({
       path: '/login',
       name: 'Login',
       component: Login
+    },
+    {
+      path: '/register',
+      name: 'Resgister',
+      component: Register
     },
     {
       path: '/home',
@@ -35,7 +41,10 @@ export default new Router({
       {
         path: '/recommend',
         name: 'RecommendsTabs',
-        component: RecommendsTabs
+        component: RecommendsTabs,
+        meta: {
+          requireAuth: true
+        }
       },
       ]
     }

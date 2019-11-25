@@ -3,6 +3,7 @@
     <el-tab-pane label="话题" name="first">话题</el-tab-pane>
     <el-tab-pane label="用户" name="second">
       <div>
+        <el-col :span="18"> </el-col>
         <el-col :span="18"><Scroll/></el-col>
         <el-col :span="6"><Sidetags/></el-col>
       </div>

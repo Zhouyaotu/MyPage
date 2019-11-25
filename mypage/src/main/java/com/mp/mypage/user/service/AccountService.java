@@ -50,6 +50,7 @@ public class AccountService {
      * @return 结果信息，包含 用户id
      */
     public Result login(String username, String password){
+        //System.out.println(username);
         UserBase userBase = userBaseMapper.selectByUsername(username);
         if(userBase == null)
             return new Result(Constant.ACCOUNT_NOT_EXIST, "账户不存在");
