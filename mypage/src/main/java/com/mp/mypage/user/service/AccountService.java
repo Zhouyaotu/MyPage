@@ -1,5 +1,7 @@
 package com.mp.mypage.user.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mp.mypage.common.Result;
 import com.mp.mypage.user.dao.UserBaseMapper;
 import com.mp.mypage.user.dao.UserInfoMapper;
@@ -126,10 +128,15 @@ public class AccountService {
      * 该方法用于获取所有用户详细信息
      * @return 处理结果， 包含 用户详细信息列表
      */
-    public Result getAllUserInfo(){
+    public Result getAllUserInfo(int pageNum, int pageSize){
+        PageHelper.offsetPage(pageNum * pageSize, pageSize);
         List<UserInfoDTO> userInfos = userInfoMapper.selectAllDTO();
-        if(userInfos != null)
-            return new Result(Constant.OPERATOR_SUCCESS, "信息获取成功").addAttribute(userInfos);
+        if(userInfos != null){
+            PageInfo pageInfo = new PageInfo<>(userInfos);
+            return new Result(Constant.OPERATOR_SUCCESS, "信息获取成功")
+                    .addAttribute("pages", pageInfo.getPages())
+                    .addAttribute("users", userInfos);
+        }
         return new Result(Constant.RESULT_EMPTY, "结果为空");
     }
 }

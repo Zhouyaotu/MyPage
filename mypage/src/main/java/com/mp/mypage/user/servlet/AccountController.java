@@ -91,8 +91,8 @@ public class AccountController {
     @CrossOrigin
     @RequestMapping(value = "/get-all-user-info")
     @ResponseBody
-    public Result getAllUserInfo(Model model){
-        Result result =accountService.getAllUserInfo();
+    public Result getAllUserInfo(Integer pageNum, Integer pageSize, Model model){
+        Result result =accountService.getAllUserInfo(pageNum, pageSize);
         model.addAttribute("result", result);
         return result;
     }
