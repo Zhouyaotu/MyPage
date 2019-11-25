@@ -1,7 +1,8 @@
 <template>
   <el-tabs v-model="activeName" @tab-click="handleClick">
     <el-tab-pane label="话题" name="first">
-      <Recommendtopic/>
+      <el-col :span="12" :offset="4"><Recommendtopic/></el-col>
+      <el-col :span="4"><Sidetags/></el-col>
     </el-tab-pane>
     <el-tab-pane label="用户" name="second">
       <div>
