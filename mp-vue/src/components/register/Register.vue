@@ -19,7 +19,9 @@
 </template>
 
 <script>
-  export default{
+
+ export default {
+    name: "Register",
     data () {
       return {
         checked: true,
@@ -36,7 +38,8 @@
         this.$axios
           .post('/user/register', {
             username: this.loginForm.username,
-            password: this.loginForm.password
+            password: this.loginForm.password,
+            head_img: "default.jpg"
           })
           .then(resp => {
             if (resp.data.code === 0) {
@@ -53,7 +56,7 @@
           .catch(failResponse => {})
       }
     }
-  }
+  };
 </script>
 
 <style>

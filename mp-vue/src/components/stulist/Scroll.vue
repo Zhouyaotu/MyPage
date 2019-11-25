@@ -28,7 +28,7 @@
 </template>
 
 <script>
-  import Headimg from '@/components/stulist/Headimg'
+  import Headimg from '@/components/common/Headimg'
   import Stutags from '@/components/stulist/Stutags'
   export default {
     name:'Scroll',

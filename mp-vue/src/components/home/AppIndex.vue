@@ -2,7 +2,9 @@
   <div>
     <el-container>
       <el-header>
-        用户基本信息
+        <div>
+        个人主页
+        </div>
       </el-header>
       <el-main>
         <el-col :gutter="10">
@@ -32,8 +34,12 @@
 </template>
 
 <script>
+import Headimg from '@/components/common/Headimg'
 export default {
-  name: "AppIndex"
+  name: "AppIndex",
+  components:{
+      Headimg,
+    },
 };
 </script>
 
