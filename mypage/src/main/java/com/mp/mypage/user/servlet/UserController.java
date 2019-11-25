@@ -100,8 +100,8 @@ public class UserController {
     @CrossOrigin
     @RequestMapping(value = "/get-all-idols-uid")
     @ResponseBody
-    public Result getAllIdolByUserId(@RequestParam("uid")long userId){
-        return userService.getAllIdolByUserId(userId);
+    public Result getAllIdolByUserId(@RequestParam("uid")long userId, Integer pageNum, Integer pageSize){
+        return userService.getAllIdolByUserId(userId, pageNum, pageSize);
     }
 
     @CrossOrigin
