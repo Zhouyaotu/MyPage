@@ -1,6 +1,8 @@
 <template>
   <el-tabs v-model="activeName" @tab-click="handleClick">
-    <el-tab-pane label="话题" name="first">话题{{test}}</el-tab-pane>
+    <el-tab-pane label="话题" name="first">
+      <Recommendtopic/>
+    </el-tab-pane>
     <el-tab-pane label="用户" name="second">
       <div>
         <el-col :span="18"> </el-col>
@@ -13,8 +15,9 @@
 <script>
   import Scroll from '@/components/stulist/Scroll'
   import Sidetags from '@/components/stulist/Sidetags'
+  import Recommendtopic from '@/components/recommend/Recommendtopic'
   export default {
-    name:'RecommendsTabs',
+    name:'RecommendTabs',
     data() {
       return {
         activeName: 'second',
@@ -23,7 +26,8 @@
     },
     components:{
       Scroll,
-      Sidetags
+      Sidetags,
+      Recommendtopic
     },
     methods: {
       handleClick(tab, event) {
