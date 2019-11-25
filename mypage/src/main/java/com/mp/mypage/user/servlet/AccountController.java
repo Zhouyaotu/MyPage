@@ -32,6 +32,7 @@ public class AccountController {
     @Resource
     FileUtil fileUtil;
 
+    @CrossOrigin
     @RequestMapping(value = "/register")
     @ResponseBody
     public Result register(UserBase userBase, Model model){
@@ -40,6 +41,7 @@ public class AccountController {
         return result;
     }
 
+    @CrossOrigin
     @RequestMapping("/login")
     @ResponseBody
         public Result login(String username, String password, Model model){
@@ -48,6 +50,7 @@ public class AccountController {
             return result;
     }
 
+    @CrossOrigin
     @RequestMapping("/modify-password")
     @ResponseBody
     public Result modifyPassword(long id, String password, Model model){
@@ -56,6 +59,7 @@ public class AccountController {
         return result;
     }
 
+    @CrossOrigin
     @RequestMapping("/modify-headimg")
     @ResponseBody
     public Result modifyHeadImg(long id, MultipartFile file, Model model){
@@ -65,6 +69,7 @@ public class AccountController {
         return result;
     }
 
+    @CrossOrigin
     @RequestMapping("/modify-user-info")
     @ResponseBody
     public Result modifyUserInfo(long id, UserInfo userInfo, Model model){

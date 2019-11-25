@@ -33,7 +33,6 @@ public class TestServlet {
         userBase.setUsername(username);
         userBase.setPassword("123456");
         userBase.setAccountStatus((byte)0);
-        userBase.setHeadImg("image.img");
         userBase.setAccountType((byte)0);
         userBase.setSafeEmail(email);
 
