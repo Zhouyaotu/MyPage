@@ -5,11 +5,14 @@
       <el-container type="flex">
         <el-aside width="250px">
           <Headimg />
+          <el-button type="primary" size="mini">关注</el-button>
         </el-aside>
         <el-main>
           <el-row type="flex" justify="start">{{stu.base.username}}</el-row>
-          <el-row type="flex" justify="start">{{stu.detail.id}}</el-row>
-          <el-row type="flex" justify="start">我的话题</el-row>
+          <el-row type="flex" justify="start">{{stu.detail.homeProvince}}</el-row>
+          <el-row type="flex" justify="start">
+            <Stutags />
+          </el-row>
         </el-main>
       </el-container>
     </div>
@@ -31,7 +34,7 @@
 import Headimg from "@/components/common/Headimg";
 import Stutags from "@/components/common/Stutags";
 export default {
-  name: "Recommendtopic",
+  name: "Recommenduser",
   data() {
     return {
       // 总数据
@@ -57,7 +60,7 @@ export default {
       this.$axios
         .post(
           "/user/get-all-user-info",
-          { pageNum: _this.currentPage, pageSize: _this.PageSize },
+          { pageNum: _this.currentPage - 1, pageSize: _this.PageSize },
           { emulateJSON: true }
         )
         .then(resp => {
@@ -75,13 +78,13 @@ export default {
       this.PageSize = val;
       // 注意：在改变每页显示的条数时，要将页码显示到第一页
       this.currentPage = 1;
-      this.getData()
+      this.getData();
     },
     // 显示第几页
     handleCurrentChange(val) {
       // 改变默认的页数
       this.currentPage = val;
-      this.getData()
+      this.getData();
     }
   },
   created: function() {

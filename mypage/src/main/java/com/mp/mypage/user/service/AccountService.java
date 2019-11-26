@@ -135,6 +135,7 @@ public class AccountService {
             PageInfo pageInfo = new PageInfo<>(userInfos);
             return new Result(Constant.OPERATOR_SUCCESS, "信息获取成功")
                     .addAttribute("pages", pageInfo.getPages())
+                    .addAttribute("totalCount", pageInfo.getTotal())
                     .addAttribute("users", userInfos);
         }
         return new Result(Constant.RESULT_EMPTY, "结果为空");
