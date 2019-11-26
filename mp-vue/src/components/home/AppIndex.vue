@@ -6,21 +6,23 @@
       </el-header>
       <el-main>
         <el-col :gutter="10">
-          <el-tabs type="border-card" stretch=true>
+          <el-tabs type="border-card" stretch="true">
             <el-tab-pane label="信息管理">
-              <el-row>
                 <div class="grid-content bg-purple">
-                  <el-container>
-                    <el-aside width="200px">
-                      <div style = "margin-top:50px"><Headimg v-bind:head='this.info.detail.headImg'/></div>
-                    </el-aside>
-                    <el-main>Main</el-main>
-                  </el-container>
+                  <el-row>
+                    <el-col width="200px" :span="3" >
+                      <el-row style="margin:10px 50px 10px 20px">
+                        <Headimg v-bind:head="this.info.detail.headImg" />
+                      </el-row>
+                      <el-row style="margin:-135px 50px -40px 30px ;font-size:20px">
+                        <i class="el-icon-setting"></i>
+                      </el-row>
+                    </el-col>
+                    <el-col :span="21">
+                      main
+                    </el-col>
+                  </el-row>
                 </div>
-              </el-row>
-              <el-row>
-                <div class="grid-content bg-purple"></div>
-              </el-row>
             </el-tab-pane>
             <el-tab-pane label="我的动态">动态</el-tab-pane>
             <el-tab-pane label="我关注的">我关注的</el-tab-pane>
@@ -45,25 +47,26 @@ export default {
   components: {
     Headimg
   },
-  created : function(){
-      this.getInfo()
+  created: function() {
+    this.getInfo();
   },
   methods: {
-    getInfo(){
+    getInfo() {
       this.$axios
-        .get("/user/get-user-info",
-          {params:{id:this.$store.state.user.uid,}},
+        .get(
+          "/user/get-user-info",
+          { params: { id: this.$store.state.user.uid } },
           { emulateJSON: true }
         )
         .then(resp => {
           if (resp && resp.data.code === 0 && resp.status === 200) {
-            this.info = resp.data.attribute
+            this.info = resp.data.attribute;
+          } else {
+            alert(status.data.description);
           }
-          else{
-            alert(status.data.description)
-          }
-          this.info.detail.headImg = this.$axios.defaults.hostport+this.info.detail.headImg
-          alert(this.info.detail.headImg)
+          this.info.detail.headImg =
+            this.$axios.defaults.hostport + this.info.detail.headImg;
+          //alert(this.info.detail.headImg);
         });
     }
   }
