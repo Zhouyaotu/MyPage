@@ -13,8 +13,10 @@
     name:'Stutags',
     data () {  
       return {
-        
       }
-    }
+    },
+    methods:{
+      
+    },
   }
 </script>

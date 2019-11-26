@@ -1,5 +1,7 @@
 package com.mp.mypage.user.service;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.mp.mypage.common.Result;
 import com.mp.mypage.user.dao.UserFollowerMapper;
 import com.mp.mypage.user.dao.UserGroupMapper;
@@ -195,12 +197,15 @@ public class UserService {
      * @param srcId 用户id
      * @return 结果信息， 包含带有详细信息的关注列表
      */
-    public Result getAllIdolByUserId(long srcId){
+    public Result getAllIdolByUserId(long srcId, int pageNum, int pageSize){
+        PageHelper.offsetPage(pageNum * pageSize, pageSize);
         List<UserIdolDTO> idols = userFollowerMapper.selectAllIdolByUserId(srcId);
-        if(idols != null)
+        if(idols != null){
+            PageInfo pageInfo = new PageInfo<>(idols);
             return new Result(Constant.OPERATOR_SUCCESS, "关注列表获取成功")
-                    .setAttribute(idols);
-        else
+                    .addAttribute("pages", pageInfo.getPages())
+                    .addAttribute("idols", idols);
+        } else
             return new Result(Constant.RESULT_EMPTY, "结果为空");
     }
 
