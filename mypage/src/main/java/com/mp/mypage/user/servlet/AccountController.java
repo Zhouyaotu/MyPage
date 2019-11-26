@@ -92,6 +92,7 @@ public class AccountController {
     @RequestMapping(value = "/get-all-user-info")
     @ResponseBody
     public Result getAllUserInfo(Integer pageNum, Integer pageSize, Model model){
+        System.out.println(pageNum+" "+pageSize);
         Result result =accountService.getAllUserInfo(pageNum, pageSize);
         model.addAttribute("result", result);
         return result;
