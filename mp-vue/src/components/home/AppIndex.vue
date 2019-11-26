@@ -12,8 +12,7 @@
                 <div class="grid-content bg-purple">
                   <el-container>
                     <el-aside width="200px">
-                      <div style = "margin-top:50px"><Headimg/></div>
-                      
+                      <div style = "margin-top:50px"><Headimg v-bind:head='this.info.detail.headImg'/></div>
                     </el-aside>
                     <el-main>Main</el-main>
                   </el-container>
@@ -40,13 +39,34 @@ export default {
   name: "AppIndex",
   data() {
     return {
-      info: []
+      info: {}
     };
   },
   components: {
     Headimg
   },
-  method: {}
+  created : function(){
+      this.getInfo()
+  },
+  methods: {
+    getInfo(){
+      this.$axios
+        .get("/user/get-user-info",
+          {params:{id:this.$store.state.user.uid,}},
+          { emulateJSON: true }
+        )
+        .then(resp => {
+          if (resp && resp.data.code === 0 && resp.status === 200) {
+            this.info = resp.data.attribute
+          }
+          else{
+            alert(status.data.description)
+          }
+          this.info.detail.headImg = this.$axios.defaults.hostport+this.info.detail.headImg
+          alert(this.info.detail.headImg)
+        });
+    }
+  }
 };
 </script>
 
@@ -60,7 +80,6 @@ export default {
 }
 
 .el-aside {
-  background-color: #d3dce6;
   color: #333;
   text-align: center;
   line-height: 200px;

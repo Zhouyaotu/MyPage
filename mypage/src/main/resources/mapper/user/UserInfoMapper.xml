@@ -115,7 +115,7 @@
                 #{emotionStatus,jdbcType=BIT},
             </if>
             <if test="headImg != null">
-                head_img = #{headImg,jdbcType=VARCHAR},
+                #{headImg,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>

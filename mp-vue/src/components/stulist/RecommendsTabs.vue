@@ -5,6 +5,7 @@
       <el-col :span="4"><Sidetags/></el-col>
     </el-tab-pane>
     <el-tab-pane label="用户" name="second">
+      <div>{{test}}</div>
       <div>
         <el-col :span="18"> </el-col>
         <el-col :span="18"><Scroll/></el-col>
@@ -22,7 +23,7 @@
     data() {
       return {
         activeName: 'second',
-        test: JSON.parse(window.localStorage.getItem('user' || '[]'))
+        test: this.$store.state.user
       };
     },
     components:{

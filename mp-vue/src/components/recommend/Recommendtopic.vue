@@ -3,11 +3,15 @@
     <!-- 将获取到的数据进行计算 -->
     <div v-for="stu in stulist" v-bind:key="stu.base.uid" style="width: 100%">
       <el-container type="flex">
-        <el-aside width="250px"><Headimg/></el-aside>
+        <el-aside width="250px">
+          <Headimg />
+        </el-aside>
         <el-main>
           <el-row type="flex" justify="start">{{stu.base.username}}</el-row>
           <el-row type="flex" justify="start">{{stu.detail.homeProvince}}</el-row>
-          <el-row type="flex" justify="start"><Stutags/></el-row>
+          <el-row type="flex" justify="start">
+            <Stutags />
+          </el-row>
         </el-main>
       </el-container>
     </div>
@@ -26,8 +30,8 @@
 </template>
 
 <script>
-import Headimg from '@/components/common/Headimg'
-import Stutags from '@/components/stulist/Stutags'
+import Headimg from "@/components/common/Headimg";
+import Stutags from "@/components/common/Stutags";
 export default {
   name: "Recommendtopic",
   data() {
@@ -44,16 +48,24 @@ export default {
       PageSize: 1
     };
   },
-  components:{
+  components: {
     Headimg,
-    Stutags,
+    Stutags
   },
   methods: {
     getData() {
       // 这里使用axios，使用时请提前引入
       var _this = this;
       this.$axios
-        .get("/user/get-all-user-info", { emulateJSON: true })
+        .get("/user/get-all-user-info",
+          {
+            params: {
+              pageSize: _this.pageSize,
+              pageNum: _this.currentPage
+            }
+          },
+          { emulateJSON: true }
+        )
         .then(resp => {
           if (resp && resp.status === 200) {
             _this.stulist = resp.data.attribute;

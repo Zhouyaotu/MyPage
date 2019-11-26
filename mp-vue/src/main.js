@@ -7,7 +7,9 @@ import 'element-ui/lib/theme-chalk/index.css'
 
 // 设置反向代理，前端请求默认发送到 http://localhost:8443/api
 var axios = require('axios')
-axios.defaults.baseURL = 'http://localhost:8443/api'
+axios.defaults.hostport = 'http://localhost:8443/'
+axios.defaults.api = 'api'
+axios.defaults.baseURL = axios.defaults.hostport + axios.defaults.api
 
 //转化axios传输格式
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
