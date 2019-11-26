@@ -4,7 +4,6 @@
       <el-col :span="12" :offset="4"><Recommendtopic/></el-col>
     </el-tab-pane>
     <el-tab-pane label="用户" name="second">
-      <div>{{test}}</div>
       <div>
         <el-col :span="12" :offset="4"><Recommenduser/></el-col>
         <el-col :span="4"><Sidetags/></el-col>

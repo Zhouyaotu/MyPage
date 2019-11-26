@@ -4,7 +4,6 @@
     <div v-for="stu in stulist" v-bind:key="stu.base.uid" style="width: 100%">
       <el-container type="flex">
         <el-aside width="250px">
-          <Headimg />
         </el-aside>
         <el-main>
           <el-row type="flex" justify="start">{{stu.base.username}}</el-row>
@@ -34,6 +33,8 @@ export default {
   name: "Recommendtopic",
   data() {
     return {
+      // localhost
+      host: this.$axios.defaults.hostport,
       // 总数据
       stulist: [],
       // 默认显示第几页

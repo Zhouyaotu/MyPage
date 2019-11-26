@@ -4,15 +4,19 @@
     <div v-for="stu in stulist" v-bind:key="stu.base.uid" style="width: 100%">
       <el-container type="flex">
         <el-aside width="250px">
-          <Headimg />
-          <el-button type="primary" size="mini">关注</el-button>
+          <Headimg v-bind:head="host+stu.detail.headImg" />
         </el-aside>
         <el-main>
-          <el-row type="flex" justify="start">{{stu.base.username}}</el-row>
-          <el-row type="flex" justify="start">{{stu.detail.homeProvince}}</el-row>
-          <el-row type="flex" justify="start">
-            <Stutags />
-          </el-row>
+          <el-col>
+            <el-row type="flex" justify="start">{{stu.base.username}}</el-row>
+            <el-row type="flex" justify="start">{{stu.detail.homeProvince}}</el-row>
+            <el-row type="flex" justify="start">
+              <Stutags />
+            </el-row>
+          </el-col>
+          <el-col style="margin:-30px 0px 0px 10px;">
+            <el-button type="primary" size="medium">关注</el-button>
+          </el-col>
         </el-main>
       </el-container>
     </div>
@@ -37,6 +41,7 @@ export default {
   name: "Recommenduser",
   data() {
     return {
+      host: this.$axios.defaults.hostport,
       // 总数据
       stulist: [],
       // 默认显示第几页

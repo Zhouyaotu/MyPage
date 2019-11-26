@@ -8,21 +8,48 @@
         <el-col :gutter="10">
           <el-tabs type="border-card" stretch="true">
             <el-tab-pane label="信息管理">
+              <el-row>
                 <div class="grid-content bg-purple">
                   <el-row>
-                    <el-col width="200px" :span="3" >
-                      <el-row style="margin:10px 50px 10px 20px">
+                    <el-col width="200px" :span="3">
+                      <el-row style="margin:50px 50px 10px 20px">
                         <Headimg v-bind:head="this.info.detail.headImg" />
                       </el-row>
-                      <el-row style="margin:-135px 50px -40px 30px ;font-size:20px">
+                      <el-row style="margin:-135px 50px -40px 30px ;font-size:25px">
                         <i class="el-icon-setting"></i>
                       </el-row>
                     </el-col>
-                    <el-col :span="21">
-                      main
+                    <el-col :span="13" style="margin-left:-250px ; margin-top:-25px; margin-bottom:65px;">
+                      <div style="margin:0px 50px -40px 30px ;font-size:30px">{{info.base.username}}</div>
+                      <div style="margin:-120px 50px -120px 30px ">
+                        <Tags />
+                      </div>
+                      <div style="margin:0px 50px -100px 30px ;font-size:20px">
+                        性别：{{info.detail.sex}}
+                        <span></span>
+                        专业：{{info.detail.major}}
+                      </div>
+                      <div style="margin:-50px 50px -40px 30px ;font-size:20px">
+                        现居：{{info.detail.liveCity}}
+                        <span></span>
+                        家乡：{{info.detail.homeCity}}
+                      </div>
+                    </el-col>
+                    <el-col :span="8" >
+                      <el-container >
+                        <el-header>
+                          <div style="margin-left:-400px ; font-size: 20px;">
+                            <i class="el-icon-delete"></i>
+                            <i class="el-icon-setting"></i>
+                            <i class="el-icon-share"></i>
+                          </div>
+                        </el-header>
+                        <el-main style="background-color: #ffffff; ">还没有自我介绍哦</el-main>
+                      </el-container>
                     </el-col>
                   </el-row>
                 </div>
+              </el-row>
             </el-tab-pane>
             <el-tab-pane label="我的动态">动态</el-tab-pane>
             <el-tab-pane label="我关注的">我关注的</el-tab-pane>
@@ -36,7 +63,7 @@
 
 <script>
 import Headimg from "@/components/common/Headimg";
-
+import Tags from "@/components/common/Stutags";
 export default {
   name: "AppIndex",
   data() {
@@ -45,7 +72,8 @@ export default {
     };
   },
   components: {
-    Headimg
+    Headimg,
+    Tags
   },
   created: function() {
     this.getInfo();
@@ -82,12 +110,6 @@ export default {
   line-height: 60px;
 }
 
-.el-aside {
-  color: #333;
-  text-align: center;
-  line-height: 200px;
-}
-
 .el-main {
   background-color: #e9eef3;
   color: #333;
@@ -108,9 +130,6 @@ body > .el-container {
   line-height: 320px;
 }
 
-.el-row {
-  margin-bottom: 10px;
-}
 .el-col {
   border-radius: 4px;
 }
