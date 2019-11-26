@@ -2,22 +2,22 @@
   <div>
     <el-container>
       <el-header>
-        <div>
-        个人主页
-        </div>
+        <div>个人卡片</div>
       </el-header>
       <el-main>
         <el-col :gutter="10">
-          <el-tabs type="border-card">
+          <el-tabs type="border-card" stretch=true>
             <el-tab-pane label="信息管理">
               <el-row>
-                <div class="grid-content bg-purple"></div>
-              </el-row>
-              <el-row>
-                <div class="grid-content bg-purple"></div>
-              </el-row>
-              <el-row>
-                <div class="grid-content bg-purple"></div>
+                <div class="grid-content bg-purple">
+                  <el-container>
+                    <el-aside width="200px">
+                      <div style = "margin-top:50px"><Headimg/></div>
+                      
+                    </el-aside>
+                    <el-main>Main</el-main>
+                  </el-container>
+                </div>
               </el-row>
               <el-row>
                 <div class="grid-content bg-purple"></div>
@@ -34,12 +34,19 @@
 </template>
 
 <script>
-import Headimg from '@/components/common/Headimg'
+import Headimg from "@/components/common/Headimg";
+
 export default {
   name: "AppIndex",
-  components:{
-      Headimg,
-    },
+  data() {
+    return {
+      info: []
+    };
+  },
+  components: {
+    Headimg
+  },
+  method: {}
 };
 </script>
 
@@ -80,7 +87,7 @@ body > .el-container {
 }
 
 .el-row {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 .el-col {
   border-radius: 4px;

@@ -6,7 +6,9 @@
       infinite-scroll-disabled="disabled">
       <div v-for="stu in stulist" v-bind:key="stu.base.uid" class="list-item">
         <el-container type="flex">
-          <el-aside width="250px"><Headimg/></el-aside>
+          <el-aside width="250px">
+            <Headimg/>
+          </el-aside>
           <el-main>
             <el-row type="flex" justify="start">
               {{stu.base.username}}
@@ -29,7 +31,7 @@
 
 <script>
   import Headimg from '@/components/common/Headimg'
-  import Stutags from '@/components/stulist/Stutags'
+  import Stutags from '@/components/common/Stutags'
   export default {
     name:'Scroll',
     data () {

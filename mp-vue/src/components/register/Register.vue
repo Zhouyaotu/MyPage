@@ -4,6 +4,10 @@
            label-width="0px" v-loading="loading">
     <h3 class="login_title">用户注册</h3>
     <el-form-item>
+      <el-input type="text" v-model="loginForm.safeEmail"
+                auto-complete="off" placeholder="邮箱"></el-input>
+    </el-form-item>
+    <el-form-item>
       <el-input type="text" v-model="loginForm.username"
                 auto-complete="off" placeholder="账号"></el-input>
     </el-form-item>
@@ -26,8 +30,9 @@
       return {
         checked: true,
         loginForm: {
+          safeEmail:'',
           username: '',
-          password: ''
+          password: '',
         },
         loading: false
       }
@@ -37,9 +42,11 @@
         var _this = this
         this.$axios
           .post('/user/register', {
+            accountStatus: 0,
+            accountType:0,
+            safeEmail: this.loginForm.safeEmail,
             username: this.loginForm.username,
             password: this.loginForm.password,
-            head_img: "default.jpg"
           })
           .then(resp => {
             if (resp.data.code === 0) {

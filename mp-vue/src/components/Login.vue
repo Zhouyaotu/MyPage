@@ -41,6 +41,8 @@
           .then(successResponse => {
             alert(successResponse.data.description)
             if (successResponse.data.code === 0) {
+              _this.loginForm.uid = successResponse.data.attribute.uid
+              //alert(_this.loginForm.uid)
               _this.$store.commit('login', _this.loginForm)
               var path = this.$route.query.redirect
               this.$router.replace({path: path === '/' || path === undefined ? '/index' : path})
