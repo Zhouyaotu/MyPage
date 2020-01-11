@@ -112,9 +112,15 @@
               object_user_id = #{objectUserId, jdbcType=BIGINT}
     </update>
 
-    <select id="selectAllFollowerByUserId" parameterType="java.lang.Long" resultType="java.lang.Long">
-        select subject_user_id
-        from user_follower
+    <select id="selectAllFollowerByUserId" parameterType="java.lang.Long" resultMap="UserSimpleInfoDTOResultMap">
+        select
+            ub.id as uid,
+            ub.username as username,
+            ui.head_img as head_img,
+            ui.introduction as introduction
+        from user_follower uf
+                 left outer join user_base ub on uf.subject_user_id = ub.id
+                 left outer join user_info ui on ub.id = ui.id
         where object_user_id = #{destId, jdbcType=BIGINT}
     </select>
 
@@ -135,6 +141,7 @@
         <id column="uid" jdbcType="BIGINT" property="uid"/>
         <result column="username" jdbcType="VARCHAR" property="username"/>
         <result column="head_img" jdbcType="VARCHAR" property="headImg"/>
+        <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
     </resultMap>
 
     <resultMap id="UserIdolDTOResultMap" type="com.mp.mypage.user.dto.UserIdolDTO">
@@ -149,7 +156,8 @@
             ug.group_name as group_name,
             ub.id as uid,
             ub.username as username,
-            ui.head_img as head_img
+            ui.head_img as head_img,
+            ui.introduction as introduction
         from user_follower uf
             left outer join user_group ug on uf.user_group_id = ug.id
             left outer join user_base ub on uf.object_user_id = ub.id
