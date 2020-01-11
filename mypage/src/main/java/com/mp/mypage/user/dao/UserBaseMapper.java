@@ -2,6 +2,7 @@ package com.mp.mypage.user.dao;
 
 import com.mp.mypage.user.entity.UserBase;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.dao.DataAccessException;
 
 import java.util.List;
 
@@ -9,9 +10,9 @@ import java.util.List;
 public interface UserBaseMapper {
     int deleteByPrimaryKey(Long id);
 
-    int insert(UserBase record);
+    int insert(UserBase record) throws DataAccessException;
 
-    int insertSelective(UserBase record);
+    int insertSelective(UserBase record) throws DataAccessException;
 
     UserBase selectByPrimaryKey(Long id);
 

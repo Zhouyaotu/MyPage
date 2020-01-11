@@ -5,7 +5,7 @@ package com.mp.mypage.common;
  * @author 刘鑫源
  * @time 2019/11/16
  * @lastUpdateMan 刘鑫源
- * @lastUpdateTime 2019/11/16
+ * @lastUpdateTime 2020/1/10
  * @version 1.0
  */
 public class Constant {
@@ -33,6 +33,7 @@ public class Constant {
     public static final int GROUP_NOT_EXIST = 10;
     public static final int FOLLOW_REPEAT = 11;
     public static final int UNABLE_DELETE = 12;
+    public static final int EMAIL_EXIST = 13;
 
     //==============================================
     //                字段状态常量

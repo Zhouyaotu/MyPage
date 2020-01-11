@@ -5,11 +5,14 @@ import com.github.pagehelper.PageInfo;
 import com.mp.mypage.common.Result;
 import com.mp.mypage.common.config.FileConfig;
 import com.mp.mypage.user.dao.UserBaseMapper;
+import com.mp.mypage.user.dao.UserGroupMapper;
 import com.mp.mypage.user.dao.UserInfoMapper;
 import com.mp.mypage.user.dto.UserInfoDTO;
 import com.mp.mypage.user.entity.UserBase;
+import com.mp.mypage.user.entity.UserGroup;
 import com.mp.mypage.user.entity.UserInfo;
 import com.mp.mypage.common.Constant;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -20,7 +23,7 @@ import java.util.List;
  * @author 刘鑫源
  * @time 2019/11/12
  * @lastUpdateMan 刘鑫源
- * @lastUpdateTime 2019/11/17
+ * @lastUpdateTime 2020/1/10
  * @version 1.0
  */
 @Service
@@ -30,6 +33,9 @@ public class AccountService {
 
     @Resource
     UserInfoMapper userInfoMapper;
+
+    @Resource
+    UserGroupMapper userGroupMapper;
 
     @Resource
     FileConfig fileConfig;
@@ -44,10 +50,17 @@ public class AccountService {
         String username = userBase.getUsername();
         if(null != userBaseMapper.selectByUsername(username))
             return new Result(Constant.ACCOUNT_EXIST, "账户已存在");
-        userBaseMapper.insertSelective(userBase);
+        try {
+            userBaseMapper.insertSelective(userBase);
+        } catch (DataAccessException e){
+            return new Result(Constant.EMAIL_EXIST, "邮箱已被使用");
+        }
         String defaultHeadImgUrl = fileConfig.getAccessPath() + "/" + Constant.IMG_HEAD + "/default.jpg";
         System.out.println(defaultHeadImgUrl);
-        userInfoMapper.insertSelective(new UserInfo().setId(userBase.getId()).setHeadImg(defaultHeadImgUrl));
+        String defaultIntroduction = "这个人很懒，什么也没留下";
+        userInfoMapper.insertSelective(new UserInfo().setId(userBase.getId()).setHeadImg(defaultHeadImgUrl).
+                setIntroduction(defaultIntroduction));
+        userGroupMapper.insert(new UserGroup().setUserId(userBase.getId()).setGroupName("默认分组"));
         return new Result(Constant.OPERATOR_SUCCESS, "注册成功");
     }
 
