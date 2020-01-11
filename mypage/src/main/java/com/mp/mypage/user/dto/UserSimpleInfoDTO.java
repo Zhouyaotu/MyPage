@@ -1,16 +1,18 @@
 package com.mp.mypage.user.dto;
 
-class UserSimpleInfoDTO {
+public class UserSimpleInfoDTO {
     private long uid;
     private String username;
     private String headImg;
+    private String introduction;
 
     @Override
     public String toString() {
-        return "UserSimpleInfo{" +
+        return "UserSimpleInfoDTO{" +
                 "uid=" + uid +
                 ", username='" + username + '\'' +
                 ", headImg='" + headImg + '\'' +
+                ", introduction='" + introduction + '\'' +
                 '}';
     }
 
@@ -38,6 +40,15 @@ class UserSimpleInfoDTO {
 
     public UserSimpleInfoDTO setHeadImg(String headImg) {
         this.headImg = headImg;
+        return this;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public UserSimpleInfoDTO setIntroduction(String introduction) {
+        this.introduction = introduction;
         return this;
     }
 }

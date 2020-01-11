@@ -8,6 +8,8 @@ import com.mp.mypage.user.dao.UserGroupMapper;
 import com.mp.mypage.user.dao.UserLabelMapper;
 import com.mp.mypage.user.dto.UserGroupDTO;
 import com.mp.mypage.user.dto.UserIdolDTO;
+import com.mp.mypage.user.dto.UserInfoDTO;
+import com.mp.mypage.user.dto.UserSimpleInfoDTO;
 import com.mp.mypage.user.entity.UserFollower;
 import com.mp.mypage.user.entity.UserGroup;
 import com.mp.mypage.user.entity.UserLabel;
@@ -23,7 +25,7 @@ import java.util.List;
  * @author 刘鑫源
  * @time 2019/11/12
  * @lastUpdateMan 刘鑫源
- * @lastUpdateTime 2019/11/17
+ * @lastUpdateTime 2020/1/10
  * @version 1.0
  */
 @Service
@@ -117,8 +119,10 @@ public class UserService {
      */
     public Result createUserGroup(long srcId, String groupName){
         try {
-            userGroupMapper.insert(new UserGroup().setUserId(srcId).setGroupName(groupName));
-            return new Result(Constant.OPERATOR_SUCCESS, "分组创建成功");
+            UserGroup userGroup = new UserGroup().setUserId(srcId).setGroupName(groupName);
+            userGroupMapper.insert(userGroup);
+            return new Result(Constant.OPERATOR_SUCCESS, "分组创建成功")
+                    .addAttribute("gid", userGroup.getId());
         } catch (DataAccessException e){
             e.printStackTrace();
             return new Result(Constant.ACCOUNT_NOT_EXIST, "用户不存在");
@@ -131,6 +135,9 @@ public class UserService {
      * @return 结果信息
      */
     public Result removeUserGroup(long groupId){
+        List<Long> idols = userFollowerMapper.selectAllIdolByGroupId(groupId);
+        if(idols != null && idols.size() != 0)
+            return new Result(Constant.UNABLE_DELETE, "分组无法删除");
         if(userGroupMapper.deleteByPrimaryKey(groupId) != 0)
             return new Result(Constant.OPERATOR_SUCCESS, "分组删除成功");
         else
@@ -155,11 +162,14 @@ public class UserService {
      * @param destId 关注者id
      * @return 结果信息， 包含粉丝列表
      */
-    public Result getAllFollowersByUserId(long destId){
-        List<Long> followerIds = userFollowerMapper.selectAllFollowerByUserId(destId);
-        if(followerIds != null)
+    public Result getAllFollowersByUserId(long destId, int pageNum, int pageSize){
+        PageHelper.offsetPage(pageNum * pageSize, pageSize);
+        List<UserSimpleInfoDTO> followers = userFollowerMapper.selectAllFollowerByUserId(destId);
+        PageInfo pageInfo = new PageInfo<>(followers);
+        if(followers != null)
             return new Result(Constant.OPERATOR_SUCCESS, "关注列表获取成功")
-                .setAttribute(followerIds);
+                    .addAttribute("pages", pageInfo.getPages())
+                    .addAttribute("followers", followers);
         else
             return new Result(Constant.RESULT_EMPTY, "结果为空");
     }
@@ -183,6 +193,7 @@ public class UserService {
      * @param groupId 用户分组id
      * @return 结果信息， 包含关注列表
      */
+    @Deprecated
     public Result getAllIdolByGroupId(long groupId){
         List<Long> idolIds = userFollowerMapper.selectAllIdolByGroupId(groupId);
         if(idolIds != null)
@@ -230,7 +241,7 @@ public class UserService {
      */
     public Result untagLabel(long userLabelId){
         userLabelMapper.deleteByPrimaryKey(userLabelId);
-        return new Result(Constant.OPERATOR_SUCCESS, "标签添加成功");
+        return new Result(Constant.OPERATOR_SUCCESS, "标签移除成功");
     }
 
     /**

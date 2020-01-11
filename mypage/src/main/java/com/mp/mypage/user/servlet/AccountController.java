@@ -8,9 +8,7 @@ import com.mp.mypage.user.entity.UserInfo;
 import com.mp.mypage.user.service.AccountService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
@@ -33,7 +31,7 @@ public class AccountController {
     FileUtil fileUtil;
 
     @CrossOrigin
-    @RequestMapping(value = "/register")
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     public Result register(UserBase userBase, Model model){
         Result result = accountService.register(userBase);
@@ -42,7 +40,7 @@ public class AccountController {
     }
 
     @CrossOrigin
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     @ResponseBody
         public Result login(String username, String password, Model model){
             //System.out.println(username);
@@ -52,18 +50,18 @@ public class AccountController {
     }
 
     @CrossOrigin
-    @RequestMapping("/modify-password")
+    @RequestMapping(value = "/passwords/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public Result modifyPassword(long id, String password, Model model){
+    public Result modifyPassword(@PathVariable("id")long id, String password, Model model){
         Result result = accountService.modifyPassword(id, password);
         model.addAttribute("result", result);
         return result;
     }
 
     @CrossOrigin
-    @RequestMapping("/modify-headimg")
+    @RequestMapping(value = "/headimgs/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public Result modifyHeadImg(long id, MultipartFile file, Model model){
+    public Result modifyHeadImg(@PathVariable("id") long id, MultipartFile file, Model model){
         Result result = fileUtil.upload(file, Constant.IMG_HEAD);
         if(result.getCode() == 0)
             result = accountService.modifyHeadImg(id, (String)result.getAttribute());
@@ -71,25 +69,25 @@ public class AccountController {
     }
 
     @CrossOrigin
-    @RequestMapping("/modify-user-info")
+    @RequestMapping(value = "/infos/{id}", method = RequestMethod.PUT)
     @ResponseBody
-    public Result modifyUserInfo(long id, UserInfo userInfo, Model model){
+    public Result modifyUserInfo(@PathVariable("id") long id, UserInfo userInfo, Model model){
         Result result = accountService.modifyUserInfo(id, userInfo);
         model.addAttribute("reuslt", result);
         return result;
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/get-user-info")
+    @RequestMapping(value = "/infos/{id}", method = RequestMethod.GET)
     @ResponseBody
-    public Result getUserInfo(long id, Model model){
+    public Result getUserInfo(@PathVariable("id") long id, Model model){
         Result result = accountService.getUserInfo(id);
         model.addAttribute("result", result);
         return result;
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/get-all-user-info")
+    @RequestMapping(value = "/infos", method = RequestMethod.GET)
     @ResponseBody
     public Result getAllUserInfo(Integer pageNum, Integer pageSize, Model model){
         System.out.println(pageNum+" "+pageSize);

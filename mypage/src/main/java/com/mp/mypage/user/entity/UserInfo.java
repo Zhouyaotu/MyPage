@@ -27,6 +27,8 @@ public class UserInfo {
 
     private String headImg;
 
+    private String introduction;
+
     @Override
     public String toString() {
         return "UserInfo{" +
@@ -42,6 +44,7 @@ public class UserInfo {
                 ", workStatus=" + workStatus +
                 ", emotionStatus=" + emotionStatus +
                 ", headImg='" + headImg + '\'' +
+                ", introduction='" + introduction + '\'' +
                 '}';
     }
 
@@ -150,6 +153,15 @@ public class UserInfo {
 
     public UserInfo setHeadImg(String headImg) {
         this.headImg = headImg;
+        return this;
+    }
+
+    public String getIntroduction() {
+        return introduction;
+    }
+
+    public UserInfo setIntroduction(String introduction) {
+        this.introduction = introduction;
         return this;
     }
 }

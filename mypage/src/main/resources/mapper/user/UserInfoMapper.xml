@@ -14,10 +14,11 @@
         <result column="work_status" jdbcType="BIT" property="workStatus"/>
         <result column="emotion_status" jdbcType="BIT" property="emotionStatus"/>
         <result column="head_img" jdbcType="VARCHAR" property="headImg"/>
+        <result column="introduction" jdbcType="VARCHAR" property="introduction"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, sex, birth_year, home_province, home_city, live_province, live_city,
-    major, enrollment_year, work_status, emotion_status, head_img
+    major, enrollment_year, work_status, emotion_status, head_img, introduction
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
@@ -34,11 +35,12 @@
         insert into user_info (id, sex, birth_year,
                                home_province, home_city, live_province,
                                live_city, major, enrollment_year,
-                               work_status, emotion_status, head_img)
+                               work_status, emotion_status, head_img, introduction)
         values (#{id,jdbcType=BIGINT}, #{sex,jdbcType=BIT}, #{birthYear,jdbcType=DATE},
                 #{homeProvince,jdbcType=VARCHAR}, #{homeCity,jdbcType=VARCHAR}, #{liveProvince,jdbcType=VARCHAR},
                 #{liveCity,jdbcType=VARCHAR}, #{major,jdbcType=VARCHAR}, #{enrollmentYear,jdbcType=DATE},
-                #{workStatus,jdbcType=BIT}, #{emotionStatus,jdbcType=BIT}, #{headImg,jdbcType=VARCHAR})
+                #{workStatus,jdbcType=BIT}, #{emotionStatus,jdbcType=BIT}, #{headImg,jdbcType=VARCHAR},
+                #{introduction,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="com.mp.mypage.user.entity.UserInfo">
         insert into user_info
@@ -79,6 +81,9 @@
             <if test="headImg != null">
                 head_img,
             </if>
+            <if test="introduction != null">
+                introduction
+            </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -116,6 +121,9 @@
             </if>
             <if test="headImg != null">
                 #{headImg,jdbcType=VARCHAR},
+            </if>
+            <if test="introduction != null">
+                #{introduction,jdbcType=VARCHAR}
             </if>
         </trim>
     </insert>
@@ -155,6 +163,9 @@
             <if test="headImg != null">
                 head_img = #{headImg,jdbcType=VARCHAR},
             </if>
+            <if test="introduction != null">
+                introduction = #{introduction,jdbcType=VARCHAR}
+            </if>
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
@@ -170,7 +181,8 @@
             enrollment_year = #{enrollmentYear,jdbcType=DATE},
             work_status     = #{workStatus,jdbcType=BIT},
             emotion_status  = #{emotionStatus,jdbcType=BIT},
-            head_img        = #{headImg,jdbcType=VARCHAR}
+            head_img        = #{headImg,jdbcType=VARCHAR},
+            introduction = #{introduction,jdbcType=VARCHAR}
         where id = #{id,jdbcType=BIGINT}
     </update>
 
@@ -197,7 +209,8 @@
             ub.account_type as account_type,
             ub.account_status as account_status,
             ui.id as id, sex, birth_year, home_province, home_city, live_province, live_city,
-               major, enrollment_year, work_status, emotion_status, ui.head_img as head_img
+               major, enrollment_year, work_status, emotion_status, ui.head_img as head_img,
+                introduction
     </sql>
     <select id="selectDTOByUserId" resultMap="UserInfoDTOResultMap">
         select
