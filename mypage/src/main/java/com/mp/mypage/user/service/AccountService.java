@@ -3,6 +3,7 @@ package com.mp.mypage.user.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.mp.mypage.common.Result;
+import com.mp.mypage.common.config.FileConfig;
 import com.mp.mypage.user.dao.UserBaseMapper;
 import com.mp.mypage.user.dao.UserInfoMapper;
 import com.mp.mypage.user.dto.UserInfoDTO;
@@ -30,6 +31,9 @@ public class AccountService {
     @Resource
     UserInfoMapper userInfoMapper;
 
+    @Resource
+    FileConfig fileConfig;
+
 
     /**
      * 该方法用于注册用户信息
@@ -41,7 +45,9 @@ public class AccountService {
         if(null != userBaseMapper.selectByUsername(username))
             return new Result(Constant.ACCOUNT_EXIST, "账户已存在");
         userBaseMapper.insertSelective(userBase);
-        userInfoMapper.insertSelective(new UserInfo().setId(userBase.getId()));
+        String defaultHeadImgUrl = fileConfig.getAccessPath() + "/" + Constant.IMG_HEAD + "/default.jpg";
+        System.out.println(defaultHeadImgUrl);
+        userInfoMapper.insertSelective(new UserInfo().setId(userBase.getId()).setHeadImg(defaultHeadImgUrl));
         return new Result(Constant.OPERATOR_SUCCESS, "注册成功");
     }
 

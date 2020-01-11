@@ -32,6 +32,7 @@ public class Constant {
 
     public static final int GROUP_NOT_EXIST = 10;
     public static final int FOLLOW_REPEAT = 11;
+    public static final int UNABLE_DELETE = 12;
 
     //==============================================
     //                字段状态常量

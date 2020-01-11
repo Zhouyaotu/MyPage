@@ -112,9 +112,14 @@
               object_user_id = #{objectUserId, jdbcType=BIGINT}
     </update>
 
-    <select id="selectAllFollowerByUserId" parameterType="java.lang.Long" resultType="java.lang.Long">
-        select subject_user_id
-        from user_follower
+    <select id="selectAllFollowerByUserId" parameterType="java.lang.Long" resultMap="UserSimpleInfoDTOResultMap">
+        select
+            ub.id as uid,
+            ub.username as username,
+            ui.head_img as head_img
+        from user_follower uf
+                 left outer join user_base ub on uf.subject_user_id = ub.id
+                 left outer join user_info ui on ub.id = ui.id
         where object_user_id = #{destId, jdbcType=BIGINT}
     </select>
 

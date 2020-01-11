@@ -1,6 +1,6 @@
 package com.mp.mypage.user.dto;
 
-class UserSimpleInfoDTO {
+public class UserSimpleInfoDTO {
     private long uid;
     private String username;
     private String headImg;

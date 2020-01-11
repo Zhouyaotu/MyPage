@@ -16,7 +16,7 @@ import javax.annotation.Resource;
  * @author 刘鑫源
  * @time 2019/11/12
  * @lastUpdateMan 刘鑫源
- * @lastUpdateTime 2019/11/17
+ * @lastUpdateTime 2019/1/10
  * @version 1.0
  */
 @Controller
@@ -79,8 +79,8 @@ public class UserController {
     @CrossOrigin
     @RequestMapping(value = "/get-all-followers")
     @ResponseBody
-    public Result getAllFollowersByUserId(@RequestParam("uid")long srcId){
-        return userService.getAllFollowersByUserId(srcId);
+    public Result getAllFollowersByUserId(@RequestParam("uid")long srcId, Integer pageNum, Integer pageSize){
+        return userService.getAllFollowersByUserId(srcId, pageNum, pageSize);
     }
 
     @CrossOrigin
@@ -88,13 +88,6 @@ public class UserController {
     @ResponseBody
     public Result getAllUserGroupByUserId(@RequestParam("uid")long srcId){
         return userService.getAllUserGroupByUserId(srcId);
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "/get-all-idols-gid")
-    @ResponseBody
-    public Result getAllIdolByGroupId(@RequestParam("gid")long groupId){
-        return userService.getAllIdolByGroupId(groupId);
     }
 
     @CrossOrigin
