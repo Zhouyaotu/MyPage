@@ -119,8 +119,10 @@ public class UserService {
      */
     public Result createUserGroup(long srcId, String groupName){
         try {
-            userGroupMapper.insert(new UserGroup().setUserId(srcId).setGroupName(groupName));
-            return new Result(Constant.OPERATOR_SUCCESS, "分组创建成功");
+            UserGroup userGroup = new UserGroup().setUserId(srcId).setGroupName(groupName);
+            userGroupMapper.insert(userGroup);
+            return new Result(Constant.OPERATOR_SUCCESS, "分组创建成功")
+                    .addAttribute("gid", userGroup.getId());
         } catch (DataAccessException e){
             e.printStackTrace();
             return new Result(Constant.ACCOUNT_NOT_EXIST, "用户不存在");
@@ -239,7 +241,7 @@ public class UserService {
      */
     public Result untagLabel(long userLabelId){
         userLabelMapper.deleteByPrimaryKey(userLabelId);
-        return new Result(Constant.OPERATOR_SUCCESS, "标签添加成功");
+        return new Result(Constant.OPERATOR_SUCCESS, "标签移除成功");
     }
 
     /**

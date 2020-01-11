@@ -51,7 +51,7 @@ public class AccountService {
         if(null != userBaseMapper.selectByUsername(username))
             return new Result(Constant.ACCOUNT_EXIST, "账户已存在");
         try {
-            userBaseMapper.insertSelective(userBase);
+            userBaseMapper.insertSelective(userBase.setAccountStatus((byte)0));
         } catch (DataAccessException e){
             return new Result(Constant.EMAIL_EXIST, "邮箱已被使用");
         }
