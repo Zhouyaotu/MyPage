@@ -56,9 +56,11 @@ export default {
       // 这里使用axios，使用时请提前引入
       var _this = this;
       this.$axios
-        .post(
-          "/user/get-all-user-info",
-          { pageNum: _this.currentPage, pageSize: _this.PageSize },
+        .get(
+          "/user/infos",
+          {
+            params: { pageNum: _this.currentPage - 1, pageSize: _this.PageSize }
+          },
           { emulateJSON: true }
         )
         .then(resp => {
