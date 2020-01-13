@@ -33,10 +33,10 @@
       login () {
         var _this = this
         this.$axios
-          .post('/user/login', {
+          .get('/user/login',{params : {
             username: this.loginForm.username,
             password: this.loginForm.password
-          },
+          }},
           {emulateJSON:true})
           .then(successResponse => {
             alert(successResponse.data.description)

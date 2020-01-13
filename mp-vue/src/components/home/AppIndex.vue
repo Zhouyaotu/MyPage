@@ -82,8 +82,7 @@ export default {
     getInfo() {
       this.$axios
         .get(
-          "/user/get-user-info",
-          { params: { id: this.$store.state.user.uid } },
+          "/user/infos/"+this.$store.state.user.uid,
           { emulateJSON: true }
         )
         .then(resp => {
