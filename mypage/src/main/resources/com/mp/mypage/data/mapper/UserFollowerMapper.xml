@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mp.mypage.data.dao.UserFollowerMapper">
+  <resultMap id="BaseResultMap" type="com.mp.mypage.data.entity.UserFollower">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="subject_user_id" jdbcType="BIGINT" property="subjectUserId" />
+    <result column="object_user_id" jdbcType="BIGINT" property="objectUserId" />
+    <result column="user_group_id" jdbcType="BIGINT" property="userGroupId" />
+    <result column="follow_status" jdbcType="BIT" property="followStatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, subject_user_id, object_user_id, user_group_id, follow_status
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_follower
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_follower
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mp.mypage.data.entity.UserFollower">
+    insert into user_follower (id, subject_user_id, object_user_id, 
+      user_group_id, follow_status)
+    values (#{id,jdbcType=BIGINT}, #{subjectUserId,jdbcType=BIGINT}, #{objectUserId,jdbcType=BIGINT}, 
+      #{userGroupId,jdbcType=BIGINT}, #{followStatus,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mp.mypage.data.entity.UserFollower">
+    insert into user_follower
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="subjectUserId != null">
+        subject_user_id,
+      </if>
+      <if test="objectUserId != null">
+        object_user_id,
+      </if>
+      <if test="userGroupId != null">
+        user_group_id,
+      </if>
+      <if test="followStatus != null">
+        follow_status,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="subjectUserId != null">
+        #{subjectUserId,jdbcType=BIGINT},
+      </if>
+      <if test="objectUserId != null">
+        #{objectUserId,jdbcType=BIGINT},
+      </if>
+      <if test="userGroupId != null">
+        #{userGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="followStatus != null">
+        #{followStatus,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mp.mypage.data.entity.UserFollower">
+    update user_follower
+    <set>
+      <if test="subjectUserId != null">
+        subject_user_id = #{subjectUserId,jdbcType=BIGINT},
+      </if>
+      <if test="objectUserId != null">
+        object_user_id = #{objectUserId,jdbcType=BIGINT},
+      </if>
+      <if test="userGroupId != null">
+        user_group_id = #{userGroupId,jdbcType=BIGINT},
+      </if>
+      <if test="followStatus != null">
+        follow_status = #{followStatus,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mp.mypage.data.entity.UserFollower">
+    update user_follower
+    set subject_user_id = #{subjectUserId,jdbcType=BIGINT},
+      object_user_id = #{objectUserId,jdbcType=BIGINT},
+      user_group_id = #{userGroupId,jdbcType=BIGINT},
+      follow_status = #{followStatus,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
