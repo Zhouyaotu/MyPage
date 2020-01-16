@@ -7,11 +7,13 @@ public class NotifyRemind {
 
     private Integer type;
 
-    private String sender;
+    private Integer subjectType;
 
-    private String action;
+    private Long subjectId;
 
-    private String objectType;
+    private Integer action;
+
+    private Integer objectType;
 
     private Long objectId;
 
@@ -22,9 +24,10 @@ public class NotifyRemind {
         return "NotifyRemind{" +
                 "id=" + id +
                 ", type=" + type +
-                ", sender='" + sender + '\'' +
-                ", action='" + action + '\'' +
-                ", objectType='" + objectType + '\'' +
+                ", subjectType=" + subjectType +
+                ", subjectId=" + subjectId +
+                ", action=" + action +
+                ", objectType=" + objectType +
                 ", objectId=" + objectId +
                 ", createTime=" + createTime +
                 '}';
@@ -48,29 +51,38 @@ public class NotifyRemind {
         return this;
     }
 
-    public String getSender() {
-        return sender;
+    public Integer getSubjectType() {
+        return subjectType;
     }
 
-    public NotifyRemind setSender(String sender) {
-        this.sender = sender;
+    public NotifyRemind setSubjectType(Integer subjectType) {
+        this.subjectType = subjectType;
         return this;
     }
 
-    public String getAction() {
+    public Long getSubjectId() {
+        return subjectId;
+    }
+
+    public NotifyRemind setSubjectId(Long subjectId) {
+        this.subjectId = subjectId;
+        return this;
+    }
+
+    public Integer getAction() {
         return action;
     }
 
-    public NotifyRemind setAction(String action) {
+    public NotifyRemind setAction(Integer action) {
         this.action = action;
         return this;
     }
 
-    public String getObjectType() {
+    public Integer getObjectType() {
         return objectType;
     }
 
-    public NotifyRemind setObjectType(String objectType) {
+    public NotifyRemind setObjectType(Integer objectType) {
         this.objectType = objectType;
         return this;
     }

@@ -5,11 +5,11 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="sender" jdbcType="BIGINT" property="sender" />
+    <result column="sender_id" jdbcType="BIGINT" property="senderId" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, title, content, sender, create_time
+    id, title, content, sender_id, create_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -23,9 +23,9 @@
   </delete>
   <insert id="insert" parameterType="com.mp.mypage.notify.entity.NotifyAnnounce">
     insert into notify_announce (id, title, content, 
-      sender, create_time)
+      sender_id, create_time)
     values (#{id,jdbcType=BIGINT}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
-      #{sender,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP})
+      #{senderId,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.mp.mypage.notify.entity.NotifyAnnounce">
     insert into notify_announce
@@ -39,8 +39,8 @@
       <if test="content != null">
         content,
       </if>
-      <if test="sender != null">
-        sender,
+      <if test="senderId != null">
+        sender_id,
       </if>
       <if test="createTime != null">
         create_time,
@@ -56,8 +56,8 @@
       <if test="content != null">
         #{content,jdbcType=VARCHAR},
       </if>
-      <if test="sender != null">
-        #{sender,jdbcType=BIGINT},
+      <if test="senderId != null">
+        #{senderId,jdbcType=BIGINT},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -73,8 +73,8 @@
       <if test="content != null">
         content = #{content,jdbcType=VARCHAR},
       </if>
-      <if test="sender != null">
-        sender = #{sender,jdbcType=BIGINT},
+      <if test="senderId != null">
+        sender_id = #{senderId,jdbcType=BIGINT},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -86,7 +86,7 @@
     update notify_announce
     set title = #{title,jdbcType=VARCHAR},
       content = #{content,jdbcType=VARCHAR},
-      sender = #{sender,jdbcType=BIGINT},
+      sender_id = #{senderId,jdbcType=BIGINT},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>

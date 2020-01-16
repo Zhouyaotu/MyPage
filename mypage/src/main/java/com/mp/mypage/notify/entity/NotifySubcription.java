@@ -7,9 +7,11 @@ public class NotifySubcription {
 
     private Long userId;
 
-    private Long objectId;
+    private Integer subjectType;
 
-    private String objectType;
+    private Long subjectId;
+
+    private Integer subjectAction;
 
     private Date createTime;
 
@@ -18,8 +20,9 @@ public class NotifySubcription {
         return "NotifySubcription{" +
                 "id=" + id +
                 ", userId=" + userId +
-                ", objectId=" + objectId +
-                ", objectType='" + objectType + '\'' +
+                ", subjectType=" + subjectType +
+                ", subjectId=" + subjectId +
+                ", subjectAction=" + subjectAction +
                 ", createTime=" + createTime +
                 '}';
     }
@@ -42,21 +45,30 @@ public class NotifySubcription {
         return this;
     }
 
-    public Long getObjectId() {
-        return objectId;
+    public Integer getSubjectType() {
+        return subjectType;
     }
 
-    public NotifySubcription setObjectId(Long objectId) {
-        this.objectId = objectId;
+    public NotifySubcription setSubjectType(Integer subjectType) {
+        this.subjectType = subjectType;
         return this;
     }
 
-    public String getObjectType() {
-        return objectType;
+    public Long getSubjectId() {
+        return subjectId;
     }
 
-    public NotifySubcription setObjectType(String objectType) {
-        this.objectType = objectType;
+    public NotifySubcription setSubjectId(Long subjectId) {
+        this.subjectId = subjectId;
+        return this;
+    }
+
+    public Integer getSubjectAction() {
+        return subjectAction;
+    }
+
+    public NotifySubcription setSubjectAction(Integer subjectAction) {
+        this.subjectAction = subjectAction;
         return this;
     }
 

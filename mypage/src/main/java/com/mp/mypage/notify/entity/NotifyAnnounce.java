@@ -9,7 +9,7 @@ public class NotifyAnnounce {
 
     private String content;
 
-    private Long sender;
+    private Long senderId;
 
     private Date createTime;
 
@@ -19,7 +19,7 @@ public class NotifyAnnounce {
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", content='" + content + '\'' +
-                ", sender=" + sender +
+                ", senderId=" + senderId +
                 ", createTime=" + createTime +
                 '}';
     }
@@ -51,12 +51,12 @@ public class NotifyAnnounce {
         return this;
     }
 
-    public Long getSender() {
-        return sender;
+    public Long getSenderId() {
+        return senderId;
     }
 
-    public NotifyAnnounce setSender(Long sender) {
-        this.sender = sender;
+    public NotifyAnnounce setSenderId(Long senderId) {
+        this.senderId = senderId;
         return this;
     }
 

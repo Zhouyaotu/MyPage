@@ -4,12 +4,13 @@
   <resultMap id="BaseResultMap" type="com.mp.mypage.notify.entity.NotifySubcription">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="user_id" jdbcType="BIGINT" property="userId" />
-    <result column="object_id" jdbcType="BIGINT" property="objectId" />
-    <result column="object_type" jdbcType="VARCHAR" property="objectType" />
+    <result column="subject_type" jdbcType="INTEGER" property="subjectType" />
+    <result column="subject_id" jdbcType="BIGINT" property="subjectId" />
+    <result column="subject_action" jdbcType="INTEGER" property="subjectAction" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, user_id, object_id, object_type, create_time
+    id, user_id, subject_type, subject_id, subject_action, create_time
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -22,10 +23,12 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" parameterType="com.mp.mypage.notify.entity.NotifySubcription">
-    insert into notify_subcription (id, user_id, object_id, 
-      object_type, create_time)
-    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{objectId,jdbcType=BIGINT}, 
-      #{objectType,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP})
+    insert into notify_subcription (id, user_id, subject_type, 
+      subject_id, subject_action, create_time
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{subjectType,jdbcType=INTEGER}, 
+      #{subjectId,jdbcType=BIGINT}, #{subjectAction,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.mp.mypage.notify.entity.NotifySubcription">
     insert into notify_subcription
@@ -36,11 +39,14 @@
       <if test="userId != null">
         user_id,
       </if>
-      <if test="objectId != null">
-        object_id,
+      <if test="subjectType != null">
+        subject_type,
       </if>
-      <if test="objectType != null">
-        object_type,
+      <if test="subjectId != null">
+        subject_id,
+      </if>
+      <if test="subjectAction != null">
+        subject_action,
       </if>
       <if test="createTime != null">
         create_time,
@@ -53,11 +59,14 @@
       <if test="userId != null">
         #{userId,jdbcType=BIGINT},
       </if>
-      <if test="objectId != null">
-        #{objectId,jdbcType=BIGINT},
+      <if test="subjectType != null">
+        #{subjectType,jdbcType=INTEGER},
       </if>
-      <if test="objectType != null">
-        #{objectType,jdbcType=VARCHAR},
+      <if test="subjectId != null">
+        #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="subjectAction != null">
+        #{subjectAction,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
@@ -70,11 +79,14 @@
       <if test="userId != null">
         user_id = #{userId,jdbcType=BIGINT},
       </if>
-      <if test="objectId != null">
-        object_id = #{objectId,jdbcType=BIGINT},
+      <if test="subjectType != null">
+        subject_type = #{subjectType,jdbcType=INTEGER},
       </if>
-      <if test="objectType != null">
-        object_type = #{objectType,jdbcType=VARCHAR},
+      <if test="subjectId != null">
+        subject_id = #{subjectId,jdbcType=BIGINT},
+      </if>
+      <if test="subjectAction != null">
+        subject_action = #{subjectAction,jdbcType=INTEGER},
       </if>
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
@@ -85,8 +97,9 @@
   <update id="updateByPrimaryKey" parameterType="com.mp.mypage.notify.entity.NotifySubcription">
     update notify_subcription
     set user_id = #{userId,jdbcType=BIGINT},
-      object_id = #{objectId,jdbcType=BIGINT},
-      object_type = #{objectType,jdbcType=VARCHAR},
+      subject_type = #{subjectType,jdbcType=INTEGER},
+      subject_id = #{subjectId,jdbcType=BIGINT},
+      subject_action = #{subjectAction,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
