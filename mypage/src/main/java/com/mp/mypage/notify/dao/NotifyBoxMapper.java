@@ -1,7 +1,12 @@
 package com.mp.mypage.notify.dao;
 
 import com.mp.mypage.notify.entity.NotifyBox;
+import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
+import java.util.List;
+
+@Mapper
 public interface NotifyBoxMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +19,9 @@ public interface NotifyBoxMapper {
     int updateByPrimaryKeySelective(NotifyBox record);
 
     int updateByPrimaryKey(NotifyBox record);
+
+////////////////////////////////////////////////////////
+    Date selectLatestNotifyTime(Long userId);
+    List<NotifyBox> selectByUserId(Long userId);
+
 }

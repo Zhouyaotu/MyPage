@@ -125,4 +125,9 @@
       other = #{other,jdbcType=CHAR}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select *
+    from notify_config
+    where user_id = #{userId};
+  </select>
 </mapper>

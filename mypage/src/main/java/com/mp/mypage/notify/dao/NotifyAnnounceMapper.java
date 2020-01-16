@@ -1,7 +1,12 @@
 package com.mp.mypage.notify.dao;
 
 import com.mp.mypage.notify.entity.NotifyAnnounce;
+import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
+import java.util.List;
+
+@Mapper
 public interface NotifyAnnounceMapper {
     int deleteByPrimaryKey(Long id);
 
@@ -14,4 +19,6 @@ public interface NotifyAnnounceMapper {
     int updateByPrimaryKeySelective(NotifyAnnounce record);
 
     int updateByPrimaryKey(NotifyAnnounce record);
+
+    List<NotifyAnnounce> selectLaterThan(Date creatTime);
 }

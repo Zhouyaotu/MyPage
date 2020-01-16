@@ -103,4 +103,16 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select *
+    from notify_subcription
+    where user_id = #{userId};
+  </select>
+  <delete id="deleteByDetail">
+    delete from notify_subcription
+    where user_id = #{userId} and
+          subject_id = #{subjectId} and
+          subject_action = #{action} and
+          subject_type = #{subjectType};
+  </delete>
 </mapper>

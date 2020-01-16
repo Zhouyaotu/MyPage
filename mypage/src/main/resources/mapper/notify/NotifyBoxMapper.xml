@@ -103,4 +103,16 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectLatestNotifyTime" resultType="java.util.Date">
+    select max(create_time)
+    from notify_box
+    where user_id = #{userId} and
+          notify_type = 0;
+  </select>
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select *
+    from notify_box
+    where user_id = #{userId}
+    order by create_time;
+  </select>
 </mapper>
