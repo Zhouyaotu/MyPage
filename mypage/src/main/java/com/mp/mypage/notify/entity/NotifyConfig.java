@@ -115,4 +115,14 @@ public class NotifyConfig {
         this.other = other;
         return this;
     }
+
+    public NotifyConfig setDefaultAttr(){
+        this.like = true;
+        this.comment = true;
+        this.follow = true;
+        this.publish = true;
+        this.privateMsg = true;
+        this.other = "";
+        return this;
+    }
 }
