@@ -21,7 +21,7 @@ public interface NotifyBoxMapper {
     int updateByPrimaryKey(NotifyBox record);
 
 ////////////////////////////////////////////////////////
-    Date selectLatestNotifyTime(Long userId);
+    Date selectLatestNotifyTime(Long userId, Integer notifyType);
     List<NotifyBox> selectByUserId(Long userId);
 
 }

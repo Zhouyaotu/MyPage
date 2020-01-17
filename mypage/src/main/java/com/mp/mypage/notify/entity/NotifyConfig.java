@@ -1,5 +1,8 @@
 package com.mp.mypage.notify.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class NotifyConfig {
     private Long id;
 
@@ -29,6 +32,16 @@ public class NotifyConfig {
                 ", privateMsg=" + privateMsg +
                 ", other='" + other + '\'' +
                 '}';
+    }
+
+    public List<Boolean> getConfigVector(){
+        List<Boolean> vector = new ArrayList<>();
+        vector.add(like);
+        vector.add(comment);
+        vector.add(follow);
+        vector.add(publish);
+        vector.add(privateMsg);
+        return vector;
     }
 
     public Long getId() {

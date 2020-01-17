@@ -107,7 +107,7 @@
     select max(create_time)
     from notify_box
     where user_id = #{userId} and
-          notify_type = 0;
+          notify_type = #{notifyType};
   </select>
   <select id="selectByUserId" resultMap="BaseResultMap">
     select *

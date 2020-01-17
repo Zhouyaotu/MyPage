@@ -125,4 +125,15 @@
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+  <select id="selectSubscribedRemind" resultMap="BaseResultMap">
+    select *
+    from notify_remind nr join notify_subcription ns on
+         nr.subject_id = ns.subject_id and
+         nr.action = ns.subject_action and
+         nr.subject_type = ns.subject_action
+    where nr.create_time >= ns.create_time and
+          ns.user_id = #{userId} and
+          nr.create_time > #{createTime}
+    order by nr.create_time;
+  </select>
 </mapper>

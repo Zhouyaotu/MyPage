@@ -53,7 +53,7 @@ public class NotifyService {
     }
 
     Result pullAnnounce(long userId){
-        Date lateseTime = boxMapper.selectLatestNotifyTime(userId);
+        Date lateseTime = boxMapper.selectLatestNotifyTime(userId, NotifyConstant.TYPE_ANOUNCE);
         List<NotifyAnnounce> unreadAnounces = announceMapper.selectLaterThan(lateseTime);
         NotifyBox box = new NotifyBox().setUserId(userId).setRead(false).setNotifyType(NotifyConstant.TYPE_ANOUNCE);
         for(NotifyAnnounce na : unreadAnounces){
@@ -64,7 +64,18 @@ public class NotifyService {
     }
 
     Result pullRemind(long userId){
-        return new Result(Constant.NOT_IMPLEMENT, "未实现");
+        Date lateseTime = boxMapper.selectLatestNotifyTime(userId, NotifyConstant.TYPE_REMIND);
+        List<NotifyRemind> reminds = remindMapper.selectSubscribedRemind(userId, lateseTime);
+        NotifyConfig config = configMapper.selectByUserId(userId);
+        List<Boolean> configVector = config.getConfigVector();
+        NotifyBox box = new NotifyBox().setUserId(userId).setRead(false).setNotifyType(NotifyConstant.TYPE_REMIND);
+        for(NotifyRemind rm : reminds){
+            if(configVector.get(rm.getAction())){
+                box.setNotifyId(rm.getId()).setCreateTime(rm.getCreateTime());
+                boxMapper.insert(box);
+            }
+        }
+        return new Result(Constant.OPERATOR_SUCCESS, "操作成功");
     }
 
     Result getNotifyBox(long userId){
@@ -107,6 +118,7 @@ public class NotifyService {
         NotifyConfig config = configMapper.selectByUserId(userId);
         return new Result(Constant.OPERATOR_SUCCESS, "通知配置获取成功").addAttribute(config);
     }
+
     Result readNotify(long notifyBoxId){
         boxMapper.updateByPrimaryKeySelective(new NotifyBox().setRead(true));
         return new Result(Constant.OPERATOR_SUCCESS, "操作成功");
