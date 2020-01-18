@@ -130,4 +130,28 @@
     from notify_config
     where user_id = #{userId};
   </select>
+  <update id="updateByUserIdSelective" parameterType="com.mp.mypage.notify.entity.NotifyConfig">
+    update notify_config
+    <set>
+      <if test="like != null">
+        `like` = #{like,jdbcType=BIT},
+      </if>
+      <if test="comment != null">
+        `comment` = #{comment,jdbcType=BIT},
+      </if>
+      <if test="follow != null">
+        follow = #{follow,jdbcType=BIT},
+      </if>
+      <if test="publish != null">
+        publish = #{publish,jdbcType=BIT},
+      </if>
+      <if test="privateMsg != null">
+        private_msg = #{privateMsg,jdbcType=BIT},
+      </if>
+      <if test="other != null">
+        other = #{other,jdbcType=CHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
 </mapper>

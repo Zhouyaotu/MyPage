@@ -43,7 +43,7 @@ public class NotifyService {
      * @param content 通知内容
      * @return 结果信息
      */
-    Result createAnnounce(long sender, String title, String content){
+    public Result createAnnounce(long sender, String title, String content){
         NotifyAnnounce announce = new NotifyAnnounce().setSenderId(sender).setTitle(title).setContent(content)
                 .setCreateTime(new Date());
         announceMapper.insert(announce);
@@ -60,7 +60,7 @@ public class NotifyService {
      * @param objectId 客体ID
      * @return 结果信息
      */
-    Result createRemind(Integer type, Integer subjectType, Long subjectId,
+    public Result createRemind(Integer type, Integer subjectType, Long subjectId,
                         Integer action, Integer objectType, Long objectId){
         NotifyRemind remind = new NotifyRemind().setType(type).setSubjectType(subjectType)
                 .setSubjectId(subjectId).setAction(action).setObjectType(objectType)
@@ -74,8 +74,10 @@ public class NotifyService {
      * @param userId 用户ID
      * @return 操作结果
      */
-    Result pullAnnounce(long userId){
+    public Result pullAnnounce(long userId){
         Date lateseTime = boxMapper.selectLatestNotifyTime(userId, NotifyConstant.TYPE_ANOUNCE);
+        if(lateseTime == null)
+            lateseTime = new Date(0);
         List<NotifyAnnounce> unreadAnounces = announceMapper.selectLaterThan(lateseTime);
         NotifyBox box = new NotifyBox().setUserId(userId).setRead(false).setNotifyType(NotifyConstant.TYPE_ANOUNCE);
         for(NotifyAnnounce na : unreadAnounces){
@@ -90,11 +92,16 @@ public class NotifyService {
      * @param userId 用户ID
      * @return 操作结果
      */
-    Result pullRemind(long userId){
+    public Result pullRemind(long userId){
         Date lateseTime = boxMapper.selectLatestNotifyTime(userId, NotifyConstant.TYPE_REMIND);
+        if(lateseTime == null)
+            lateseTime = new Date(0);
+        System.out.println("remind:" + lateseTime);
+
         List<NotifyRemind> reminds = remindMapper.selectSubscribedRemind(userId, lateseTime);
+        System.out.println("remind:" + reminds);
         NotifyConfig config = configMapper.selectByUserId(userId);
-        List<Boolean> configVector = config.getConfigVector();
+        List<Boolean> configVector = config.convertToConfigVector();
         NotifyBox box = new NotifyBox().setUserId(userId).setRead(false).setNotifyType(NotifyConstant.TYPE_REMIND);
         for(NotifyRemind rm : reminds){
             if(configVector.get(rm.getAction())){
@@ -110,7 +117,7 @@ public class NotifyService {
      * @param userId 用户ID
      * @return 操作结果，包含消息列表
      */
-    Result getNotifyBox(long userId){
+    public Result getNotifyBox(long userId){
         List<NotifyBox> boxes = boxMapper.selectByUserId(userId);
         //TODO 1.分类获取 2.加工消息
         return new Result(Constant.OPERATOR_SUCCESS, "通知获取成功")
@@ -125,7 +132,7 @@ public class NotifyService {
      * @param action 动作
      * @return 操作结果
      */
-    Result subcribe(Long userId, Integer subjectType, Long subjectId, Integer action){
+    public Result subcribe(Long userId, Integer subjectType, Long subjectId, Integer action){
         NotifySubcription subcription = new NotifySubcription().setUserId(userId)
                 .setSubjectType(subjectType).setSubjectId(subjectId)
                 .setSubjectAction(action).setCreateTime(new Date());
@@ -141,7 +148,7 @@ public class NotifyService {
      * @param action 动作
      * @return 操作结果
      */
-    Result cancelSubcribe(Long userId, Integer subjectType, Long subjectId, Integer action){
+    public Result cancelSubcribe(Long userId, Integer subjectType, Long subjectId, Integer action){
         NotifySubcription subcription = new NotifySubcription().setUserId(userId).setSubjectType(subjectType).
                 setSubjectId(subjectId).setSubjectAction(action);
         subcriptionMapper.deleteByDetail(userId, subjectType, subjectId, action);
@@ -153,7 +160,7 @@ public class NotifyService {
      * @param userId 用户ID
      * @return 操作结果，包含订阅列表
      */
-    Result getSubcriptions(long userId){
+    public Result getSubcriptions(long userId){
         List<NotifySubcription> subcriptions = subcriptionMapper.selectByUserId(userId);
         if(subcriptions == null || subcriptions.isEmpty())
             return new Result(Constant.RESULT_EMPTY, "结果为空");
@@ -166,7 +173,7 @@ public class NotifyService {
      * @param userId 用户ID
      * @return 操作结果
      */
-    Result createConfig(Long userId){
+    public Result createConfig(Long userId){
         NotifyConfig config = new NotifyConfig().setUserId(userId).setDefaultAttr();
         configMapper.insertSelective(config);
         return new Result(Constant.OPERATOR_SUCCESS, "操作成功");
@@ -177,9 +184,9 @@ public class NotifyService {
      * @param config 订阅配置
      * @return 操作结果
      */
-    Result modifyConfig(long userId, NotifyConfig config){
+    public Result modifyConfig(long userId, NotifyConfig config){
         config.setUserId(userId);
-        configMapper.updateByPrimaryKeySelective(config);
+        configMapper.updateByUserIdSelective(config);
         return new Result(Constant.OPERATOR_SUCCESS, "操作成功");
     }
 
@@ -188,7 +195,7 @@ public class NotifyService {
      * @param userId 用户ID
      * @return 操作结果，包含订阅配置信息
      */
-    Result getConfig(long userId){
+    public Result getConfig(long userId){
         NotifyConfig config = configMapper.selectByUserId(userId);
         return new Result(Constant.OPERATOR_SUCCESS, "通知配置获取成功").addAttribute(config);
     }
@@ -198,9 +205,8 @@ public class NotifyService {
      * @param notifyBoxId 消息在消息盒子中的ID
      * @return 操作结果
      */
-    Result readNotify(long notifyBoxId){
-        boxMapper.updateByPrimaryKeySelective(new NotifyBox().setRead(true));
+    public Result readNotify(long notifyBoxId){
+        boxMapper.updateByPrimaryKeySelective(new NotifyBox().setId(notifyBoxId).setRead(true));
         return new Result(Constant.OPERATOR_SUCCESS, "操作成功");
     }
-
 }

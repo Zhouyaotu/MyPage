@@ -34,7 +34,7 @@ public class NotifyConfig {
                 '}';
     }
 
-    public List<Boolean> getConfigVector(){
+    public List<Boolean> convertToConfigVector(){
         List<Boolean> vector = new ArrayList<>();
         vector.add(like);
         vector.add(comment);
@@ -122,7 +122,7 @@ public class NotifyConfig {
         this.follow = true;
         this.publish = true;
         this.privateMsg = true;
-        this.other = "";
+        this.other = "{}";
         return this;
     }
 }

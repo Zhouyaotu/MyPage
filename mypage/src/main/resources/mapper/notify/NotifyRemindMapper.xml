@@ -130,10 +130,10 @@
     from notify_remind nr join notify_subcription ns on
          nr.subject_id = ns.subject_id and
          nr.action = ns.subject_action and
-         nr.subject_type = ns.subject_action
+         nr.subject_type = ns.subject_type
     where nr.create_time >= ns.create_time and
           ns.user_id = #{userId} and
-          nr.create_time > #{createTime}
+          nr.create_time > #{createTime,jdbcType=TIMESTAMP}
     order by nr.create_time;
   </select>
 </mapper>

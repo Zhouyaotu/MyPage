@@ -19,4 +19,5 @@ public interface NotifyConfigMapper {
 
     /////////////////////////////////////////////////////
     NotifyConfig selectByUserId(Long userId);
+    int updateByUserIdSelective(NotifyConfig record);
 }
