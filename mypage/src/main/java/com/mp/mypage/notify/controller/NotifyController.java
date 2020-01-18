@@ -24,7 +24,7 @@ public class NotifyController {
     @CrossOrigin
     @RequestMapping(value = "/announce", method = RequestMethod.POST)
     @ResponseBody
-    Result createAnnounce(long sender, String title, String content, Model model){
+    Result createAnnounce(long sender, String title, String content){
         return notifyService.createAnnounce(sender, title, content);
     }
 
@@ -32,77 +32,77 @@ public class NotifyController {
     @RequestMapping(value = "/remind", method = RequestMethod.POST)
     @ResponseBody
     Result createRemind(Integer type, Integer subjectType, Long subjectId,
-                        Integer action, Integer objectType, Long objectId, Model model){
+                        Integer action, Integer objectType, Long objectId){
         return notifyService.createRemind(type, subjectType, subjectId, action, objectType, objectId);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/announce", method = RequestMethod.GET)
     @ResponseBody
-    Result pullAnnounce(long userId, Model model){
+    Result pullAnnounce(long userId){
         return notifyService.pullAnnounce(userId);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/remind", method = RequestMethod.GET)
     @ResponseBody
-    Result pullRemind(long userId, Model model){
+    Result pullRemind(long userId){
         return notifyService.pullRemind(userId);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/notify-box", method = RequestMethod.GET)
     @ResponseBody
-    Result getNotifyBox(long userId, Model model){
+    Result getNotifyBox(long userId){
         return notifyService.getNotifyBox(userId);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/subscription", method = RequestMethod.POST)
     @ResponseBody
-    Result subcribe(Long userId, Integer subjectType, Long subjectId, Integer action, Model model){
+    Result subcribe(Long userId, Integer subjectType, Long subjectId, Integer action){
         return notifyService.subcribe(userId, subjectType, subjectId, action);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/subscription", method = RequestMethod.DELETE)
     @ResponseBody
-    Result cancelSubcribe(Long userId, Integer subjectType, Long subjectId, Integer action, Model model){
+    Result cancelSubcribe(Long userId, Integer subjectType, Long subjectId, Integer action){
         return notifyService.cancelSubcribe(userId, subjectType, subjectId, action);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/subscription", method = RequestMethod.GET)
     @ResponseBody
-    Result getSubcriptions(long userId, Model model){
+    Result getSubcriptions(long userId){
         return notifyService.getSubcriptions(userId);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/config", method = RequestMethod.POST)
     @ResponseBody
-    Result createConfig(Long userId, Model model){
+    Result createConfig(Long userId){
         return notifyService.createConfig(userId);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/config", method = RequestMethod.PUT)
     @ResponseBody
-    Result modifyConfig(long userId, NotifyConfig config, Model model){
+    Result modifyConfig(long userId, NotifyConfig config){
         return notifyService.modifyConfig(userId, config);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/config", method = RequestMethod.GET)
     @ResponseBody
-    Result getConfig(long userId, Model model){
+    Result getConfig(long userId){
         return notifyService.getConfig(userId);
     }
 
     @CrossOrigin
     @RequestMapping(value = "/read", method = RequestMethod.PUT)
     @ResponseBody
-    Result readNotify(long notifyBoxId, Model model){
+    Result readNotify(long notifyBoxId){
         return notifyService.readNotify(notifyBoxId);
     }
 }
