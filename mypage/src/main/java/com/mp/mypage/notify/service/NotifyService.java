@@ -72,7 +72,7 @@ public class NotifyService {
     /**
      * 该方法用于拉取通知消息，使最新的消息进入用户消息盒子中
      * @param userId 用户ID
-     * @return 操作结果
+     * @return 操作结果, 包含未读消息数
      */
     public Result pullAnnounce(long userId){
         Date lateseTime = boxMapper.selectLatestNotifyTime(userId, NotifyConstant.TYPE_ANOUNCE);
@@ -84,13 +84,14 @@ public class NotifyService {
             box.setNotifyId(na.getId()).setCreateTime(na.getCreateTime());
             boxMapper.insert(box);
         }
-        return new Result(Constant.OPERATOR_SUCCESS, "操作成功");
+        return new Result(Constant.OPERATOR_SUCCESS, "操作成功")
+                .addAttribute("unreadNum", unreadAnounces.size());
     }
 
     /**
      * 该方法用于拉取通知消息，使最新的消息进入用户消息盒子中
      * @param userId 用户ID
-     * @return 操作结果
+     * @return 操作结果, 包含未读消息数
      */
     public Result pullRemind(long userId){
         Date lateseTime = boxMapper.selectLatestNotifyTime(userId, NotifyConstant.TYPE_REMIND);
@@ -103,13 +104,16 @@ public class NotifyService {
         NotifyConfig config = configMapper.selectByUserId(userId);
         List<Boolean> configVector = config.convertToConfigVector();
         NotifyBox box = new NotifyBox().setUserId(userId).setRead(false).setNotifyType(NotifyConstant.TYPE_REMIND);
+        int unreadNum = 0;
         for(NotifyRemind rm : reminds){
             if(configVector.get(rm.getAction())){
                 box.setNotifyId(rm.getId()).setCreateTime(rm.getCreateTime());
                 boxMapper.insert(box);
+                unreadNum++;
             }
         }
-        return new Result(Constant.OPERATOR_SUCCESS, "操作成功");
+        return new Result(Constant.OPERATOR_SUCCESS, "操作成功")
+                .addAttribute("unreadNum", unreadNum);
     }
 
     /**
@@ -119,9 +123,16 @@ public class NotifyService {
      */
     public Result getNotifyBox(long userId){
         List<NotifyBox> boxes = boxMapper.selectByUserId(userId);
+        int unreadNum = 0;
+        for(NotifyBox nb : boxes){
+            if(!nb.getRead())
+                unreadNum++;
+        }
+
         //TODO 1.分类获取 2.加工消息
         return new Result(Constant.OPERATOR_SUCCESS, "通知获取成功")
-                .addAttribute(boxes);
+                .addAttribute("unreadNum", unreadNum)
+                .addAttribute("boxes", boxes);
     }
 
     /**
