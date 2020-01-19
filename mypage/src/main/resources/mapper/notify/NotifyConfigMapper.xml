@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mp.mypage.notify.dao.NotifyConfigMapper">
+  <resultMap id="BaseResultMap" type="com.mp.mypage.notify.entity.NotifyConfig">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="like" jdbcType="BIT" property="like" />
+    <result column="comment" jdbcType="BIT" property="comment" />
+    <result column="follow" jdbcType="BIT" property="follow" />
+    <result column="publish" jdbcType="BIT" property="publish" />
+    <result column="private_msg" jdbcType="BIT" property="privateMsg" />
+    <result column="other" jdbcType="CHAR" property="other" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_id, `like`, `comment`, follow, publish, private_msg, other
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from notify_config
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from notify_config
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.mp.mypage.notify.entity.NotifyConfig">
+    insert into notify_config (id, user_id, `like`, `comment`, 
+      follow, publish, private_msg, other
+      )
+    values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{like,jdbcType=BIT}, #{comment,jdbcType=BIT}, 
+      #{follow,jdbcType=BIT}, #{publish,jdbcType=BIT}, #{privateMsg,jdbcType=BIT}, #{other,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.mp.mypage.notify.entity.NotifyConfig">
+    insert into notify_config
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="like != null">
+        `like`,
+      </if>
+      <if test="comment != null">
+        `comment`,
+      </if>
+      <if test="follow != null">
+        follow,
+      </if>
+      <if test="publish != null">
+        publish,
+      </if>
+      <if test="privateMsg != null">
+        private_msg,
+      </if>
+      <if test="other != null">
+        other,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="like != null">
+        #{like,jdbcType=BIT},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=BIT},
+      </if>
+      <if test="follow != null">
+        #{follow,jdbcType=BIT},
+      </if>
+      <if test="publish != null">
+        #{publish,jdbcType=BIT},
+      </if>
+      <if test="privateMsg != null">
+        #{privateMsg,jdbcType=BIT},
+      </if>
+      <if test="other != null">
+        #{other,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mp.mypage.notify.entity.NotifyConfig">
+    update notify_config
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="like != null">
+        `like` = #{like,jdbcType=BIT},
+      </if>
+      <if test="comment != null">
+        `comment` = #{comment,jdbcType=BIT},
+      </if>
+      <if test="follow != null">
+        follow = #{follow,jdbcType=BIT},
+      </if>
+      <if test="publish != null">
+        publish = #{publish,jdbcType=BIT},
+      </if>
+      <if test="privateMsg != null">
+        private_msg = #{privateMsg,jdbcType=BIT},
+      </if>
+      <if test="other != null">
+        other = #{other,jdbcType=CHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mp.mypage.notify.entity.NotifyConfig">
+    update notify_config
+    set user_id = #{userId,jdbcType=BIGINT},
+      `like` = #{like,jdbcType=BIT},
+      `comment` = #{comment,jdbcType=BIT},
+      follow = #{follow,jdbcType=BIT},
+      publish = #{publish,jdbcType=BIT},
+      private_msg = #{privateMsg,jdbcType=BIT},
+      other = #{other,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select *
+    from notify_config
+    where user_id = #{userId};
+  </select>
+  <update id="updateByUserIdSelective" parameterType="com.mp.mypage.notify.entity.NotifyConfig">
+    update notify_config
+    <set>
+      <if test="like != null">
+        `like` = #{like,jdbcType=BIT},
+      </if>
+      <if test="comment != null">
+        `comment` = #{comment,jdbcType=BIT},
+      </if>
+      <if test="follow != null">
+        follow = #{follow,jdbcType=BIT},
+      </if>
+      <if test="publish != null">
+        publish = #{publish,jdbcType=BIT},
+      </if>
+      <if test="privateMsg != null">
+        private_msg = #{privateMsg,jdbcType=BIT},
+      </if>
+      <if test="other != null">
+        other = #{other,jdbcType=CHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>
